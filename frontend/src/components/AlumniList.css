@@ -1,0 +1,217 @@
+/* ===============================
+   ALUMNI PAGE BASE
+================================= */
+
+.alumni-page {
+  padding: 120px 8%;
+  background: #f8f9fa;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+/* ===============================
+   HEADER
+================================= */
+
+.alumni-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.alumni-header h1 {
+  font-size: 42px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.alumni-header p {
+  color: #666;
+  margin-bottom: 30px;
+  font-size: 16px;
+}
+
+/* Search */
+.search-input {
+  padding: 14px 22px;
+  width: 100%;
+  max-width: 420px;
+  border-radius: 40px;
+  border: 1px solid #ddd;
+  outline: none;
+  font-size: 14px;
+  transition: 0.3s;
+}
+
+.search-input:focus {
+  border-color: #ff9800;
+  box-shadow: 0 0 10px rgba(255,152,0,0.2);
+}
+
+/* ===============================
+   GRID LAYOUT
+================================= */
+
+.alumni-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+}
+
+/* ===============================
+   CARD
+================================= */
+
+.alumni-card {
+  background: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+  transition: 0.4s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.alumni-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
+}
+
+/* ===============================
+   IMAGE
+================================= */
+
+.alumni-image {
+  width: 100%;
+  height: 240px;
+  overflow: hidden;
+}
+
+.alumni-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: 0.5s ease;
+}
+
+.alumni-card:hover .alumni-image img {
+  transform: scale(1.08);
+}
+
+/* ===============================
+   INFO
+================================= */
+
+.alumni-info {
+  padding: 25px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.alumni-info h3 {
+  font-size: 20px;
+  margin-bottom: 6px;
+}
+
+.year {
+  color: #ff9800;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.alumni-info p {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+.bio {
+  font-size: 13px;
+  color: #777;
+  margin: 10px 0 20px;
+  line-height: 1.5;
+}
+
+/* Button */
+.view-btn {
+  margin-top: auto;
+  display: inline-block;
+  padding: 10px 22px;
+  border-radius: 30px;
+  background: #000;
+  color: #fff;
+  text-decoration: none;
+  font-size: 13px;
+  text-align: center;
+  transition: 0.3s;
+}
+
+.view-btn:hover {
+  background: #ff9800;
+}
+
+/* ===============================
+   RESPONSIVE BREAKPOINTS
+================================= */
+
+/* Large Laptop */
+@media (max-width: 1200px) {
+  .alumni-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+
+  .alumni-page {
+    padding: 100px 6%;
+  }
+
+  .alumni-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+  }
+
+  .alumni-header h1 {
+    font-size: 30px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+
+  .alumni-page {
+    padding: 90px 5%;
+  }
+
+  .alumni-grid {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  .alumni-header h1 {
+    font-size: 24px;
+  }
+
+  .search-input {
+    font-size: 13px;
+  }
+
+  .alumni-card {
+    border-radius: 15px;
+  }
+
+  .alumni-image {
+    height: 200px;
+  }
+
+  .alumni-info {
+    padding: 20px;
+    text-align: center;
+  }
+
+  .view-btn {
+    width: 100%;
+  }
+}
