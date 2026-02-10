@@ -1,63 +1,165 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./about.css";
+
+/* ===== Animated Counter ===== */
+const Counter = ({ target }) => {
+  const [count, setCount] = useState(0);
+  const ref = useRef(null);
+  const [start, setStart] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setStart(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.5 }
+    );
+
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!start) return;
+
+    const duration = 2000;
+    const startTime = performance.now();
+
+    const easeOutExpo = (t) =>
+      t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
+
+    const animate = (time) => {
+      const progress = Math.min((time - startTime) / duration, 1);
+      setCount(Math.floor(target * easeOutExpo(progress)));
+      if (progress < 1) requestAnimationFrame(animate);
+    };
+
+    requestAnimationFrame(animate);
+  }, [start, target]);
+
+  return <h3 ref={ref}>{count}+</h3>;
+};
 
 const About = () => {
   return (
-    <section className="aboutus">
-      <div className="aboutus-header">
-        <h1>About SB Jain Alumni Platform</h1>
-        <p>
-          Connecting the legacy of excellence — empowering alumni across the globe
-          to engage, inspire, and grow together.
-        </p>
-      </div>
+    <section className="about-page">
 
-      <div className="aboutus-body">
-        <div className="aboutus-section">
-          <h2>Our Story</h2>
-          <p>
-            The SB Jain Alumni Platform was founded with a vision to unite the
-            distinguished graduates of SB Jain Institute of Technology, Management
-            and Research (SBJITMR). We aim to create a thriving ecosystem where
-            knowledge, opportunity, and collaboration flow seamlessly across generations.
-          </p>
-        </div>
+      {/* HERO */}
+      {/* HERO SECTION */}
+{/* HERO SECTION */}
+<div className="about-hero">
+  <div className="hero-overlay"></div>
 
-        <div className="aboutus-section">
+  <div className="about-hero-content">
+    <h1>About SB Jain Alumni Network</h1>
+    <p>
+      Connecting generations of leaders, innovators, and changemakers —
+      building a global alumni community rooted in excellence.
+    </p>
+  </div>
+</div>
+
+
+
+
+      {/* STORY */}
+      {/* STORY */}
+<div className="about-section">
+  <div className="about-text">
+    <h2>Our Journey</h2>
+    <p>
+      The SB Jain Alumni Network was established to strengthen lifelong
+      connections between graduates and the institute. Our alumni are
+      leaders, innovators, and entrepreneurs shaping industries worldwide.
+    </p>
+  </div>
+
+  <div className="glass-card">
+    <img
+      src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1"
+      alt="Alumni Meeting"
+    />
+  </div>
+</div>
+
+{/* MISSION */}
+<div className="about-section reverse">
+  <div className="about-text">
+    <h2>Our Mission</h2>
+    <p>
+      To build a strong global alumni network that empowers mentorship,
+      collaboration, professional growth, and meaningful impact.
+    </p>
+  </div>
+
+  <div className="glass-card">
+    <img
+      src="https://images.unsplash.com/photo-1523580494863-6f3031224c94"
+      alt="Conference"
+    />
+  </div>
+</div>
+
+
+      {/* MISSION */}
+      <div className="about-section reverse">
+        <div className="about-text">
           <h2>Our Mission</h2>
           <p>
-            We strive to strengthen the SB Jain alumni community through
-            professional networking, mentorship, events, and lifelong learning.
-            Together, we celebrate achievements, share insights, and contribute to
-            the continued growth of our alma mater.
+            To foster a thriving alumni ecosystem that encourages collaboration,
+            mentorship, professional growth, and meaningful contributions
+            toward society and the institution.
           </p>
         </div>
+        <div className="glass-card"></div>
+      </div>
 
-        <div className="aboutus-values">
-          <h2>Our Core Values</h2>
-          <div className="values-grid">
-            <div className="value-card">
-              <h3>Connection</h3>
-              <p>Building bridges that unite alumni across disciplines and borders.</p>
-            </div>
-            <div className="value-card">
-              <h3>Growth</h3>
-              <p>Encouraging lifelong learning and professional excellence.</p>
-            </div>
-            <div className="value-card">
-              <h3>Contribution</h3>
-              <p>Inspiring alumni to give back and make a positive impact.</p>
-            </div>
+      {/* STATS */}
+      <div className="about-stats">
+        <div className="stat-box"><Counter target={5000} /><p>Alumni Worldwide</p></div>
+        <div className="stat-box"><Counter target={30} /><p>Countries</p></div>
+        <div className="stat-box"><Counter target={120} /><p>Corporate Partners</p></div>
+        <div className="stat-box"><Counter target={20} /><p>Annual Events</p></div>
+      </div>
+
+      {/* VALUES */}
+      <div className="about-values">
+        <h2>Our Core Values</h2>
+        <div className="values-grid">
+          <div className="value-card">
+            <h3>Connection</h3>
+            <p>Building strong relationships across generations.</p>
+          </div>
+          <div className="value-card">
+            <h3>Excellence</h3>
+            <p>Striving for the highest standards in all we do.</p>
+          </div>
+          <div className="value-card">
+            <h3>Leadership</h3>
+            <p>Empowering alumni to lead with integrity and purpose.</p>
+          </div>
+          <div className="value-card">
+            <h3>Impact</h3>
+            <p>Creating positive change through collaboration and innovation.</p>
           </div>
         </div>
       </div>
 
-      <div className="aboutus-footer">
-        <p>
-          Join the movement. Reconnect, rediscover, and relive the SB Jain spirit.
-        </p>
-        <button onClick={() => window.location.href = "/register"} className="join-btn">Join the Alumni Network</button>
+      {/* CTA */}
+      <div className="about-cta">
+        <h2>Become a Part of Our Growing Legacy</h2>
+        <p>Reconnect, collaborate, and inspire future generations.</p>
+        <button
+          className="join-btn"
+          onClick={() => (window.location.href = "/register")}
+        >
+          Join the Alumni Network
+        </button>
       </div>
+
     </section>
   );
 };

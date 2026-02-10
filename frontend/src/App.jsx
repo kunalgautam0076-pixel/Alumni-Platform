@@ -9,6 +9,7 @@ import Register from './components/Register'
 import Login from './components/Login'
 import AlumniDashboard from './components/AlumniDashboard'
 import AdminDashboard from './components/AdminDashboard'
+import Navbar from './components/Navbar'
 
 // ADD THESE
 import EventPage from './components/EventPage'
@@ -22,37 +23,8 @@ export default function App() {
 
   return (
     <div>
-      <header className="site-header">
-        <div className="brand">ALUMNI PLATFORM</div>
-
-        <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)}>
-          ☰
-        </button>
-
-        <nav className={`nav-links ${menuOpen ? "active" : ""}`}>
-          <Link to="/" onClick={() => setMenuOpen(false)}>Home</Link>
-          <Link to="/about" onClick={() => setMenuOpen(false)}>About Us</Link>
-          <Link to="/alumni" onClick={() => setMenuOpen(false)}>Alumni</Link>
-
-          {/* NEW LINKS */}
-          <Link to="/events" onClick={() => setMenuOpen(false)}>Events</Link>
-          <Link to="/jobs" onClick={() => setMenuOpen(false)}>Jobs</Link>
-
-          <Link to="/register" onClick={() => setMenuOpen(false)}>Register</Link>
-          <Link to="/login" onClick={() => setMenuOpen(false)}>Login</Link>
-        </nav>
-
-        {user && (
-          <div className="user-info">
-            <span>{user.name} <small>({user.role})</small></span>
-            <button className="btn logout" onClick={logout}>Logout</button>
-            {user.role === 'admin' && <Link className="btn admin" to="/admin">Admin</Link>}
-            {user.role === 'alumni' && <Link className="btn dashboard" to="/dashboard">Dashboard</Link>}
-          </div>
-        )}
-      </header>
-
-      <main style={{ padding: 20 }}>
+      <Navbar />
+      <main >
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
@@ -62,6 +34,7 @@ export default function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/dashboard" element={<AlumniDashboard />} />
           <Route path="/admin" element={<AdminDashboard />} />
+          
 
           {/* NEW ROUTES */}
           <Route path="/events" element={<EventPage />} />
