@@ -1,0 +1,70 @@
+/* Container */
+.event-wrapper {
+  padding: 50px;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f0f4ff, #e0ebff);
+  font-family: "Poppins", sans-serif;
+}
+
+/* Heading */
+.heading {
+  text-align: center;
+  font-size: 36px;
+  font-weight: 700;
+  background: linear-gradient(90deg, #0048ff, #8a00ff);
+  color: transparent;
+  -webkit-background-clip: text;
+  margin-bottom: 40px;
+}
+
+/* Grid layout */
+.event-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
+}
+
+/* Card design */
+.event-card {
+  background: rgba(255, 255, 255, 0.75);
+  padding: 25px;
+  border-radius: 18px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  transition: 0.3s ease;
+}
+
+.event-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+}
+
+/* Header inside card */
+.event-header h2 {
+  font-size: 22px;
+  font-weight: 600;
+  color: #1d1d1d;
+  margin-bottom: 8px;
+}
+
+.event-date {
+  font-size: 14px;
+  font-weight: 500;
+  color: #555;
+}
+
+/* Description */
+.event-desc {
+  margin-top: 12px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #333;
+}
+
+/* No events message */
+.no-events {
+  text-align: center;
+  font-size: 18px;
+  color: #666;
+}

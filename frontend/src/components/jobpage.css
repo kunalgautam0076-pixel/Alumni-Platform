@@ -1,0 +1,82 @@
+.job-wrapper {
+  padding: 50px;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #e2eaff, #f6f9ff);
+  font-family: "Poppins", sans-serif;
+}
+
+.heading {
+  text-align: center;
+  font-size: 38px;
+  font-weight: 700;
+  background: linear-gradient(90deg, #0048ff, #8a00ff);
+  color: transparent;
+  -webkit-background-clip: text;
+  margin-bottom: 40px;
+}
+
+.job-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+  gap: 30px;
+}
+
+.job-card {
+  background: rgba(255, 255, 255, 0.7);
+  padding: 25px;
+  border-radius: 20px;
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+  transition: 0.35s ease;
+}
+
+.job-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.job-header h2 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #1d1d1d;
+}
+
+.company-name {
+  font-size: 16px;
+  font-weight: 500;
+  color: #555;
+}
+
+.job-description {
+  margin-top: 10px;
+  color: #333;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.apply-btn {
+  width: 100%;
+  padding: 12px;
+  margin-top: 18px;
+  background: linear-gradient(90deg, #6a00ff, #8a2be2);
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.3s ease;
+  box-shadow: 0 4px 12px rgba(106, 0, 255, 0.4);
+}
+
+.apply-btn:hover {
+  background: linear-gradient(90deg, #4b00cc, #7216db);
+  box-shadow: 0 8px 18px rgba(106, 0, 255, 0.6);
+}
+
+.no-jobs {
+  text-align: center;
+  font-size: 18px;
+  color: #666;
+}

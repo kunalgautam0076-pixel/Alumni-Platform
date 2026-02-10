@@ -1,0 +1,140 @@
+.aboutus {
+  font-family: "Poppins", Arial, sans-serif;
+  background: linear-gradient(135deg, #f7faff, #e8f0ff);
+  padding: 80px 20px;
+  color: #333;
+}
+
+.aboutus-header {
+  text-align: center;
+  margin-bottom: 60px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.aboutus-header h1 {
+  font-size: 2.5rem;
+  color: #0a2e65;
+  margin-bottom: 10px;
+}
+
+.aboutus-header p {
+  font-size: 1.2rem;
+  color: #555;
+}
+
+.aboutus-body {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.aboutus-section {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+  padding: 40px;
+  margin-bottom: 40px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.aboutus-section:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.aboutus-section h2 {
+  color: #0a2e65;
+  font-size: 1.6rem;
+  margin-bottom: 15px;
+}
+
+.aboutus-section p {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: #444;
+}
+
+.aboutus-values {
+  text-align: center;
+}
+
+.aboutus-values h2 {
+  color: #0a2e65;
+  margin-bottom: 30px;
+}
+
+.values-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.value-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 25px;
+  width: 260px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.value-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
+}
+
+.value-card h3 {
+  color: #0a2e65;
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+}
+
+.value-card p {
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.aboutus-footer {
+  text-align: center;
+  margin-top: 60px;
+}
+
+.aboutus-footer p {
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.join-btn {
+  background-color: #0a2e65;
+  color: #fff;
+  border: none;
+  padding: 14px 32px;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.join-btn:hover {
+  background-color: #123f8d;
+  transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .values-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .aboutus-section {
+    padding: 25px;
+  }
+
+  .aboutus-header h1 {
+    font-size: 2rem;
+  }
+}

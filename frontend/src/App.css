@@ -1,0 +1,144 @@
+/* Header container */
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  background: #000;
+  color: #fff;
+  font-family: "Segoe UI", Arial, sans-serif;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  min-height: 60px;
+}
+
+/* Brand */
+.brand {
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #f4f4f4;
+}
+
+/* Navigation links */
+.nav-links {
+  display: flex;
+  gap: 30px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #ddd;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: color 0.2s ease;
+}
+
+.nav-links a:hover {
+  color: #00bfff;
+}
+
+/* User info */
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.user-info small {
+  color: #bbb;
+  font-size: 0.9em;
+}
+
+/* Buttons */
+.btn {
+  padding: 8px 14px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.logout { background: #e63946; color: #fff; }
+.logout:hover { background: #c92c3c; }
+
+.admin { background: #0073e6; color: #fff; }
+.admin:hover { background: #005bb5; }
+
+.dashboard { background: #2a9d8f; color: #fff; }
+.dashboard:hover { background: #22786f; }
+
+/* Hamburger button (hidden on desktop) */
+.menu-toggle {
+  display: none;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* ----------- MOBILE RESPONSIVE ----------- */
+@media (max-width: 768px) {
+  /* Flex layout for header */
+  .site-header {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 16px 10px;
+  }
+
+  /* Show hamburger */
+  .menu-toggle {
+    display: block;
+    font-size:x-large;
+  }
+
+  /* Hide nav and user info by default */
+  .nav-links,
+  .user-info {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    background: #111;
+    padding: 15px 20px;
+    gap: 15px;
+    border-top: 1px solid #222;
+  }
+
+  /* Show nav & user info when active */
+  .nav-links.active,
+  .user-info.active {
+    display: flex;
+  }
+
+  /* Center nav links text */
+  .nav-links a {
+    font-size: 1.2rem;
+    color: #ddd;
+  }
+
+  /* Move user info into menu */
+  .user-info {
+    gap: 12px;
+  }
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+}
