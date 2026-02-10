@@ -1,5 +1,65 @@
 import React from 'react';
 import './Home.css';
+import { useEffect, useState, useRef } from "react";
+
+const Counter = ({ target }) => {
+  const [count, setCount] = useState(0);
+  const [start, setStart] = useState(false);
+  const counterRef = useRef(null);
+
+  // Intersection Observer (Start on Scroll)
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setStart(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.5 }
+    );
+
+    if (counterRef.current) {
+      observer.observe(counterRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  // EaseOutExpo Animation
+  useEffect(() => {
+    if (!start) return;
+
+    const duration = 2000;
+    const startTime = performance.now();
+
+    const easeOutExpo = (t) => {
+      return t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
+    };
+
+    const animate = (currentTime) => {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const easedProgress = easeOutExpo(progress);
+
+      setCount(Math.floor(target * easedProgress));
+
+      if (progress < 1) {
+        requestAnimationFrame(animate);
+      }
+    };
+
+    requestAnimationFrame(animate);
+  }, [start, target]);
+
+  return (
+    <h3 ref={counterRef} className="gradient-number glow-number">
+      {count.toLocaleString()}+
+    </h3>
+  );
+};
+
+
 
 export default function Home() {
   return (
@@ -11,6 +71,12 @@ export default function Home() {
         </video>
 
         <div className="overlay"></div>
+
+      <div className="floating-shapes">
+  <span></span>
+  <span></span>
+  <span></span>
+</div>
 
         <div className="content">
   <div className="glass-card">
@@ -59,23 +125,26 @@ export default function Home() {
 
       {/* ===== STATS SECTION ===== */}
       <section className="stats-section">
-        <div className="stat">
-          <h3>5,000+</h3>
-          <p>Alumni Members</p>
-        </div>
-        <div className="stat">
-          <h3>300+</h3>
-          <p>Companies Connected</p>
-        </div>
-        <div className="stat">
-          <h3>150+</h3>
-          <p>Events Organized</p>
-        </div>
-        <div className="stat">
-          <h3>1,200+</h3>
-          <p>Job Opportunities</p>
-        </div>
-      </section>
+  <div className="stat">
+    <Counter target={5000} />
+    <p>Alumni Members</p>
+  </div>
+
+  <div className="stat">
+    <Counter target={300} />
+    <p>Companies Connected</p>
+  </div>
+
+  <div className="stat">
+    <Counter target={150} />
+    <p>Events Organized</p>
+  </div>
+
+  <div className="stat">
+    <Counter target={1200} />
+    <p>Job Opportunities</p>
+  </div>
+</section>
 
       {/* ===== TESTIMONIAL SECTION ===== */}
       <section className="testimonial-section">
