@@ -1,0 +1,183 @@
+/* ===============================
+   LOADING / ERROR
+================================= */
+
+.loading,
+.error {
+  padding: 150px 0;
+  text-align: center;
+  font-size: 20px;
+}
+
+/* ===============================
+   HERO
+================================= */
+
+.detail-hero {
+  position: relative;
+  height: 85vh;
+  min-height: 600px;
+  overflow: hidden;
+}
+
+.detail-hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.detail-hero .overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    rgba(0,0,0,0.7),
+    rgba(0,0,0,0.85)
+  );
+}
+
+.hero-content {
+  position: absolute;
+  bottom: 80px;
+  left: 8%;
+  color: #fff;
+  max-width: 700px;
+}
+
+.hero-content h1 {
+  font-size: 48px;
+  margin-bottom: 15px;
+}
+
+.location {
+  margin-bottom: 30px;
+  font-size: 18px;
+}
+
+/* BACK BUTTON */
+
+.back-btn {
+  margin-bottom: 20px;
+  background: transparent;
+  border: 1px solid #fff;
+  color: #fff;
+  padding: 8px 20px;
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+/* COUNTDOWN */
+
+.countdown {
+  display: flex;
+  gap: 20px;
+}
+
+.countdown div {
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(8px);
+  padding: 15px 20px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.countdown span {
+  display: block;
+  font-size: 26px;
+  font-weight: bold;
+}
+
+/* ===============================
+   CONTENT SECTION
+================================= */
+
+.detail-content-section {
+  padding: 100px 8%;
+  background: #f9f9f9;
+}
+
+.detail-info {
+  max-width: 800px;
+  margin-bottom: 60px;
+}
+
+.detail-info h2 {
+  margin-bottom: 20px;
+  font-size: 30px;
+}
+
+.detail-info p {
+  line-height: 1.7;
+  color: #555;
+}
+
+/* META CARDS */
+
+.event-meta-cards {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+  margin-bottom: 60px;
+}
+
+.meta-card {
+  flex: 1;
+  min-width: 250px;
+  background: #fff;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  transition: 0.3s;
+}
+
+.meta-card:hover {
+  transform: translateY(-5px);
+}
+
+.meta-card h4 {
+  margin-bottom: 10px;
+}
+
+/* CTA */
+
+.cta-section {
+  text-align: center;
+  padding: 60px 0;
+}
+
+.register-btn {
+  padding: 12px 35px;
+  border-radius: 30px;
+  border: none;
+  background: #000;
+  color: #fff;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.register-btn:hover {
+  background: #ff9800;
+}
+
+/* ===============================
+   RESPONSIVE
+================================= */
+
+@media (max-width: 900px) {
+
+  .hero-content {
+    left: 5%;
+    bottom: 50px;
+  }
+
+  .hero-content h1 {
+    font-size: 30px;
+  }
+
+  .countdown {
+    flex-wrap: wrap;
+  }
+
+  .event-meta-cards {
+    flex-direction: column;
+  }
+}

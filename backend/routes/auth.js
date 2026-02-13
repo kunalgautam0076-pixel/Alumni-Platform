@@ -49,5 +49,29 @@ router.post('/login', async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 });
+router.post("/create-admin", async (req, res) => {
+  try {
+    const bcrypt = require("bcryptjs");
+
+    const hashed = await bcrypt.hash("123456", 10);
+
+    const admin = new User({
+      name: "Super Admin",
+      email: "admin@gmail.com",
+      password: hashed,
+      role: "admin",
+      approved: true,
+    });
+
+    await admin.save();
+
+    res.json({ message: "Admin created successfully" });
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Error creating admin" });
+  }
+});
+
 
 module.exports = router;

@@ -1,192 +1,131 @@
-import React, { useEffect, useState } from 'react'
-import { useAuth } from '../context/AuthContext'
-import api from '../services/api'
+import React, { useEffect, useState } from "react";
+import "./adminDashboard.css";
+import api from "../services/api";
 
 export default function AdminDashboard() {
-  const { user } = useAuth()
+  const [stats, setStats] = useState({
+    alumni: 0,
+    events: 0,
+    jobs: 0,
+    pending: 0,
+  });
 
-  // existing states
-  const [requests, setRequests] = useState([])
-  const [subject, setSubject] = useState('')
-  const [text, setText] = useState('')
+  const [requests, setRequests] = useState([]);
 
-  // event states
-  const [eventTitle, setEventTitle] = useState('')
-  const [eventDate, setEventDate] = useState('')
-  const [eventDesc, setEventDesc] = useState('')
-
-  // job states
-  const [jobRole, setJobRole] = useState('')
-  const [jobCompany, setJobCompany] = useState('')
-  const [jobDesc, setJobDesc] = useState('')
-  const [jobLink, setJobLink] = useState('')
-
-  // fetch pending alumni requests
   useEffect(() => {
-    if (!user) return
-    api.get('/api/admin/requests')
-      .then(r => setRequests(r.data))
-      .catch(() => { })
-  }, [user])
+    fetchDashboard();
+  }, []);
 
-  // approve request
-  const approve = async id => {
+  const fetchDashboard = async () => {
     try {
-      await api.post(`/api/admin/approve/${id}`)
-      setRequests(requests.filter(r => r._id !== id))
+      const alumni = await api.get("/api/alumni/list");
+      const events = await api.get("/api/events");
+      const jobs = await api.get("/api/jobs");
+      const pending = await api.get("/api/admin/requests");
+
+      setStats({
+        alumni: alumni.data.length,
+        events: events.data.length,
+        jobs: jobs.data.length,
+        pending: pending.data.length,
+      });
+
+      setRequests(pending.data);
     } catch (err) {
-      alert('Failed')
+      console.log(err);
     }
-  }
+  };
 
-  // reject request
-  const reject = async id => {
-    try {
-      await api.post(`/api/admin/reject/${id}`)
-      setRequests(requests.filter(r => r._id !== id))
-    } catch (err) {
-      alert('Failed')
-    }
-  }
+  const approveUser = async (id) => {
+    await api.post(`/api/admin/approve/${id}`);
+    fetchDashboard();
+  };
 
-  // send mail to all approved alumni
-  const sendMail = async () => {
-    try {
-      await api.post('/api/admin/send-mail', { subject, text })
-      alert('Emails sent (attempted)')
-    } catch (err) {
-      alert('Failed')
-    }
-  }
-
-  // add event
-  const addEvent = async () => {
-    try {
-      await api.post('/api/admin/add-event', {
-        title: eventTitle,
-        date: eventDate,
-        description: eventDesc
-      })
-      alert("Event added & emails sent")
-
-      setEventTitle("")
-      setEventDate("")
-      setEventDesc("")
-    } catch {
-      alert("Failed to add event")
-    }
-  }
-
-  // add job
-  const addJob = async () => {
-    try {
-      await api.post('/api/admin/add-job', {
-        role: jobRole,
-        company: jobCompany,
-        description: jobDesc,
-        link: jobLink
-      })
-      alert("Job posted")
-
-      setJobRole("")
-      setJobCompany("")
-      setJobDesc("")
-      setJobLink("")
-    } catch {
-      alert("Failed to post job")
-    }
-  }
-
-  if (!user || user.role !== 'admin') return <div>Please login as admin</div>
+  const rejectUser = async (id) => {
+    await api.post(`/api/admin/reject/${id}`);
+    fetchDashboard();
+  };
 
   return (
-    <div className="container">
-      <h2>Admin Dashboard</h2>
+    <div className="admin-layout">
 
-      {/* Pending Requests */}
-      <section className="card">
-        <h3>Pending Requests</h3>
-        {requests.map(r => (
-          <div key={r._id} style={{ marginBottom: 8 }}>
-            <strong>{r.name}</strong> ({r.email})  
-            <button onClick={() => approve(r._id)}>Approve</button>  
-            <button onClick={() => reject(r._id)}>Reject</button>
+      {/* SIDEBAR */}
+      <div className="admin-sidebar">
+        <h2>Admin Panel</h2>
+        <ul>
+          <li>Dashboard</li>
+          <li>Alumni</li>
+          <li>Events</li>
+          <li>Jobs</li>
+          <li>Requests</li>
+        </ul>
+      </div>
+
+      {/* MAIN CONTENT */}
+      <div className="admin-main">
+
+        <div className="admin-header">
+          <h1>Dashboard Overview</h1>
+        </div>
+
+        {/* STATS CARDS */}
+        <div className="stats-grid">
+
+          <div className="stat-card">
+            <h3>{stats.alumni}</h3>
+            <p>Total Alumni</p>
           </div>
-        ))}
-        {requests.length === 0 && <p>No pending requests</p>}
-      </section>
 
-      {/* Send Mail */}
-      <section className="card">
-        <h3>Send Event Email to All Approved Alumni</h3>
-        <input 
-          placeholder="Subject" 
-          value={subject} 
-          onChange={e => setSubject(e.target.value)} 
-        /><br />
+          <div className="stat-card">
+            <h3>{stats.events}</h3>
+            <p>Total Events</p>
+          </div>
 
-        <textarea 
-          placeholder="Message" 
-          value={text} 
-          onChange={e => setText(e.target.value)}>
-        </textarea><br />
+          <div className="stat-card">
+            <h3>{stats.jobs}</h3>
+            <p>Total Jobs</p>
+          </div>
 
-        <button onClick={sendMail}>Send</button>
-      </section>
+          <div className="stat-card highlight">
+            <h3>{stats.pending}</h3>
+            <p>Pending Approvals</p>
+          </div>
 
-      {/* Add Event */}
-      <section className="card">
-        <h3>Add Event</h3>
-        <input 
-          placeholder="Event Title" 
-          value={eventTitle} 
-          onChange={e => setEventTitle(e.target.value)} 
-        /><br />
+        </div>
 
-        <input 
-          placeholder="Event Date" 
-          value={eventDate} 
-          onChange={e => setEventDate(e.target.value)} 
-        /><br />
+        {/* PENDING REQUESTS */}
+        <div className="request-section">
+          <h2>Pending Alumni Requests</h2>
 
-        <textarea 
-          placeholder="Description" 
-          value={eventDesc} 
-          onChange={e => setEventDesc(e.target.value)}>
-        </textarea><br />
+          {requests.length === 0 ? (
+            <p>No pending requests</p>
+          ) : (
+            requests.map((user) => (
+              <div key={user._id} className="request-card">
+                <div>
+                  <h4>{user.name}</h4>
+                  <p>{user.email}</p>
+                </div>
+                <div className="actions">
+                  <button
+                    className="approve"
+                    onClick={() => approveUser(user._id)}
+                  >
+                    Approve
+                  </button>
+                  <button
+                    className="reject"
+                    onClick={() => rejectUser(user._id)}
+                  >
+                    Reject
+                  </button>
+                </div>
+              </div>
+            ))
+          )}
+        </div>
 
-        <button onClick={addEvent}>Add Event</button>
-      </section>
-
-      {/* Add Job */}
-      <section className="card">
-        <h3>Add Job Posting</h3>
-        <input 
-          placeholder="Job Role" 
-          value={jobRole} 
-          onChange={e => setJobRole(e.target.value)} 
-        /><br />
-
-        <input 
-          placeholder="Company Name" 
-          value={jobCompany} 
-          onChange={e => setJobCompany(e.target.value)} 
-        /><br />
-
-        <textarea 
-          placeholder="Job Description" 
-          value={jobDesc} 
-          onChange={e => setJobDesc(e.target.value)}>
-        </textarea><br />
-
-        <input 
-          placeholder="Apply Link" 
-          value={jobLink} 
-          onChange={e => setJobLink(e.target.value)} 
-        /><br />
-
-        <button onClick={addJob}>Post Job</button>
-      </section>
+      </div>
     </div>
-  )
+  );
 }

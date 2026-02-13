@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 import "./eventpage.css";
 import api from "../services/api";
+import { Link } from "react-router-dom";
 
 export default function EventPage() {
   const [events, setEvents] = useState([]);
   const [filter, setFilter] = useState("all");
 
   useEffect(() => {
-    api.get("/api/events")
+    api
+      .get("/api/events")
       .then((res) => setEvents(res.data))
       .catch((err) => console.log(err));
   }, []);
@@ -100,9 +102,14 @@ export default function EventPage() {
                     {event.description}
                   </p>
 
-                  <button className="event-btn">
+                  {/* 🔥 THIS IS IMPORTANT PART */}
+                  <Link 
+                    to={`/events/${event._id}`} 
+                    className="event-btn"
+                  >
                     View Details
-                  </button>
+                  </Link>
+
                 </div>
 
               </div>
