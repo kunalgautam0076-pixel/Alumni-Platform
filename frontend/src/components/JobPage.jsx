@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import api from "../services/api";
 import "./jobpage.css";
 
 export default function JobPage() {
@@ -7,112 +8,83 @@ export default function JobPage() {
   const [location, setLocation] = useState("");
   const [type, setType] = useState("");
   const [selectedJob, setSelectedJob] = useState(null);
-const [formData, setFormData] = useState({
-  name: "",
-  email: "",
-  phone: "",
-  coverLetter: "",
-  resume: null,
-});
+  const [loading, setLoading] = useState(false);
 
+  const [formData, setFormData] = useState({
+    phone: "",
+    coverLetter: "",
+    resume: "",
+  });
 
-
+  /* ===============================
+     FETCH JOBS
+  =============================== */
   useEffect(() => {
-    fetch(
-      `http://localhost:5000/api/jobs?search=${search}&location=${location}&type=${type}`
-    )
-      .then((res) => res.json())
-      .then((data) => setJobs(data))
-      .catch((err) => console.log(err));
+    fetchJobs();
   }, [search, location, type]);
 
+  const fetchJobs = async () => {
+  try {
+    setLoading(true);
+    const res = await api.get(
+      `/api/jobs?search=${search}&location=${location}&type=${type}`
+    );
+    setJobs(res.data);
+    setLoading(false);
+  } catch (err) {
+    console.log(err);
+    setLoading(false);
+  }
+};
 
-  {selectedJob && (
-  <div className="apply-modal">
-    <div className="modal-content">
-      <h2>Apply for {selectedJob.role}</h2>
+  /* ===============================
+     HANDLE APPLY
+  =============================== */
+  const handleApply = async () => {
+    try {
+      const token = localStorage.getItem("token");
 
-      <input
-        type="text"
-        placeholder="Full Name"
-        onChange={(e) =>
-          setFormData({ ...formData, name: e.target.value })
+      const res = await fetch(
+        `http://localhost:5000/api/jobs/apply/${selectedJob._id}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            phone: formData.phone,
+            coverLetter: formData.coverLetter,
+            resume: formData.resume,
+          }),
         }
-      />
+      );
 
-      <input
-        type="email"
-        placeholder="Email"
-        onChange={(e) =>
-          setFormData({ ...formData, email: e.target.value })
-        }
-      />
+      const data = await res.json();
 
-      <input
-        type="text"
-        placeholder="Phone"
-        onChange={(e) =>
-          setFormData({ ...formData, phone: e.target.value })
-        }
-      />
+      if (!res.ok) {
+        alert(data.message);
+        return;
+      }
 
-      <textarea
-        placeholder="Cover Letter"
-        onChange={(e) =>
-          setFormData({ ...formData, coverLetter: e.target.value })
-        }
-      />
+      alert("Application Submitted ✅");
+      setSelectedJob(null);
+      setFormData({ phone: "", coverLetter: "", resume: "" });
 
-      <input
-        type="file"
-        accept=".pdf,.doc,.docx"
-        onChange={(e) =>
-          setFormData({ ...formData, resume: e.target.files[0] })
-        }
-      />
-
-      <div className="modal-actions">
-        <button onClick={() => setSelectedJob(null)}>
-          Cancel
-        </button>
-
-        <button
-          onClick={async () => {
-            const data = new FormData();
-            data.append("jobId", selectedJob._id);
-            data.append("name", formData.name);
-            data.append("email", formData.email);
-            data.append("phone", formData.phone);
-            data.append("coverLetter", formData.coverLetter);
-            data.append("resume", formData.resume);
-
-            await fetch(
-              "http://localhost:5000/api/applications",
-              {
-                method: "POST",
-                body: data,
-              }
-            );
-
-            alert("Application Submitted ✅");
-            setSelectedJob(null);
-          }}
-        >
-          Submit
-        </button>
-      </div>
-    </div>
-  </div>
-)}
+    } catch (err) {
+      alert("Error submitting application");
+    }
+  };
 
   return (
     <div className="job-page">
+      {/* HERO */}
       <div className="job-hero">
         <h1>Alumni Career Hub</h1>
         <p>Explore opportunities shared by our alumni network</p>
       </div>
 
-      {/* FILTER SECTION */}
+      {/* FILTERS */}
       <div className="job-filters">
         <input
           type="text"
@@ -137,9 +109,11 @@ const [formData, setFormData] = useState({
         </select>
       </div>
 
-      {/* JOB GRID */}
+      {/* JOB LIST */}
       <div className="job-grid">
-        {jobs.length === 0 ? (
+        {loading ? (
+          <p>Loading jobs...</p>
+        ) : jobs.length === 0 ? (
           <p className="no-jobs">No jobs found.</p>
         ) : (
           jobs.map((job) => (
@@ -161,18 +135,63 @@ const [formData, setFormData] = useState({
                 ))}
               </div>
 
-              <a href={job.link} target="_blank" rel="noreferrer">
-                <button
-  className="apply-btn"
-  onClick={() => setSelectedJob(job)}
->
-  Apply Now 🚀
-</button>
-              </a>
+              <button
+                className="apply-btn"
+                onClick={() => setSelectedJob(job)}
+              >
+                Apply Now 🚀
+              </button>
             </div>
           ))
         )}
       </div>
+
+      {/* ===============================
+          APPLY MODAL
+      =============================== */}
+      {selectedJob && (
+        <div className="apply-modal">
+          <div className="modal-content">
+            <h2>Apply for {selectedJob.role}</h2>
+
+            <input
+              type="text"
+              placeholder="Phone Number"
+              value={formData.phone}
+              onChange={(e) =>
+                setFormData({ ...formData, phone: e.target.value })
+              }
+            />
+
+            <textarea
+              placeholder="Cover Letter"
+              value={formData.coverLetter}
+              onChange={(e) =>
+                setFormData({ ...formData, coverLetter: e.target.value })
+              }
+            />
+
+            <input
+              type="text"
+              placeholder="Resume Link (Google Drive / PDF URL)"
+              value={formData.resume}
+              onChange={(e) =>
+                setFormData({ ...formData, resume: e.target.value })
+              }
+            />
+
+            <div className="modal-actions">
+              <button onClick={() => setSelectedJob(null)}>
+                Cancel
+              </button>
+
+              <button onClick={handleApply}>
+                Submit
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

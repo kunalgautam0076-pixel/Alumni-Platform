@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const Event = require("../models/Events.js");
+const Event = require("../models/Events");
+const EventRegistration = require("../models/EventRegistration");
 const auth = require("../middleware/auth");
 const isAdmin = require("../middleware/admin");
 
@@ -12,6 +13,7 @@ router.get("/", async (req, res) => {
     const events = await Event.find().sort({ date: 1 });
     res.json(events);
   } catch (err) {
+    console.error(err);
     res.status(500).json({ message: "Server error" });
   }
 });
@@ -22,9 +24,9 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
   try {
     const event = await Event.findById(req.params.id);
-    if (!event)
+    if (!event) {
       return res.status(404).json({ message: "Event not found" });
-
+    }
     res.json(event);
   } catch (err) {
     res.status(500).json({ message: "Server error" });
@@ -36,10 +38,16 @@ router.get("/:id", async (req, res) => {
 =========================== */
 router.post("/", auth, isAdmin, async (req, res) => {
   try {
+    if (!req.body.title || !req.body.date) {
+      return res.status(400).json({ message: "Title and date required" });
+    }
+
     const newEvent = new Event(req.body);
     const savedEvent = await newEvent.save();
+
     res.status(201).json(savedEvent);
   } catch (err) {
+    console.error(err);
     res.status(400).json({ message: "Failed to create event" });
   }
 });
@@ -55,8 +63,9 @@ router.put("/:id", auth, isAdmin, async (req, res) => {
       { new: true }
     );
 
-    if (!updated)
+    if (!updated) {
       return res.status(404).json({ message: "Event not found" });
+    }
 
     res.json(updated);
   } catch (err) {
@@ -71,12 +80,40 @@ router.delete("/:id", auth, isAdmin, async (req, res) => {
   try {
     const deleted = await Event.findByIdAndDelete(req.params.id);
 
-    if (!deleted)
+    if (!deleted) {
       return res.status(404).json({ message: "Event not found" });
+    }
 
     res.json({ message: "Event deleted successfully" });
   } catch (err) {
     res.status(500).json({ message: "Failed to delete event" });
+  }
+});
+
+/* ===========================
+   REGISTER FOR EVENT
+=========================== */
+router.post("/register/:id", auth, async (req, res) => {
+  try {
+    const event = await Event.findById(req.params.id);
+    if (!event) {
+      return res.status(404).json({ message: "Event not found" });
+    }
+
+    const registration = new EventRegistration({
+      user: req.user._id,
+      event: req.params.id,
+    });
+
+    await registration.save();
+
+    res.json({ message: "Registered successfully" });
+
+  } catch (err) {
+    if (err.code === 11000) {
+      return res.status(400).json({ message: "Already registered" });
+    }
+    res.status(500).json({ message: "Server error" });
   }
 });
 

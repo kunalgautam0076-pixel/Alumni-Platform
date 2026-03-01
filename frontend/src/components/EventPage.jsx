@@ -7,30 +7,60 @@ export default function EventPage() {
   const [events, setEvents] = useState([]);
   const [filter, setFilter] = useState("all");
   const [theme, setTheme] = useState("light");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
+  /* ===============================
+     THEME HANDLER
+  =============================== */
   useEffect(() => {
-  document.body.classList.remove("dark", "vision");
-  if (theme === "dark") document.body.classList.add("dark");
-  if (theme === "vision") document.body.classList.add("vision");
-}, [theme]);
+    document.body.classList.remove("dark", "vision");
+    if (theme === "dark") document.body.classList.add("dark");
+    if (theme === "vision") document.body.classList.add("vision");
+  }, [theme]);
 
+  /* ===============================
+     FETCH EVENTS
+  =============================== */
   useEffect(() => {
-    api
-      .get("/api/events")
-      .then((res) => setEvents(res.data))
-      .catch((err) => console.log(err));
+    fetchEvents();
   }, []);
 
+  const fetchEvents = async () => {
+    try {
+      setLoading(true);
+      const res = await api.get("/api/events");
+      setEvents(res.data);
+      setLoading(false);
+    } catch (err) {
+      console.log(err);
+      setError("Failed to load events");
+      setLoading(false);
+    }
+  };
+
+  /* ===============================
+     FILTER LOGIC
+  =============================== */
   const today = new Date();
 
-  const filteredEvents = events.filter((event) => {
-    if (filter === "all") return true;
+ const filteredEvents = events.filter((event) => {
+  if (!event.date) return false;
 
-    const eventDate = new Date(event.date);
-    return filter === "upcoming"
-      ? eventDate >= today
-      : eventDate < today;
-  });
+  const eventDate = new Date(event.date);
+
+  if (filter === "all") return true;
+
+  if (filter === "upcoming") {
+    return eventDate.getTime() >= today.getTime();
+  }
+
+  if (filter === "past") {
+    return eventDate.getTime() < today.getTime();
+  }
+
+  return true;
+});
 
   return (
     <div className="event-page">
@@ -60,12 +90,14 @@ export default function EventPage() {
             >
               All
             </button>
+
             <button
               className={filter === "upcoming" ? "active" : ""}
               onClick={() => setFilter("upcoming")}
             >
               Upcoming
             </button>
+
             <button
               className={filter === "past" ? "active" : ""}
               onClick={() => setFilter("past")}
@@ -75,8 +107,18 @@ export default function EventPage() {
           </div>
         </div>
 
+        {/* EVENT GRID */}
         <div className="event-grid">
-          {filteredEvents.length === 0 ? (
+
+          {loading ? (
+            <div className="no-events">
+              <h3>Loading events...</h3>
+            </div>
+          ) : error ? (
+            <div className="no-events">
+              <h3>{error}</h3>
+            </div>
+          ) : filteredEvents.length === 0 ? (
             <div className="no-events">
               <h3>No Events Found</h3>
               <p>Check back later for upcoming alumni gatherings.</p>
@@ -88,11 +130,17 @@ export default function EventPage() {
                 <div className="event-image">
                   <img
                     src={
-                      event.image ||
-                      "https://images.unsplash.com/photo-1492684223066-81342ee5ff30"
+                      event.image
+                        ? event.image
+                        : "https://images.unsplash.com/photo-1492684223066-81342ee5ff30"
                     }
                     alt={event.title}
+                    onError={(e) =>
+                      (e.target.src =
+                        "https://images.unsplash.com/photo-1492684223066-81342ee5ff30")
+                    }
                   />
+
                   <div className="date-badge">
                     {new Date(event.date).toLocaleDateString()}
                   </div>
@@ -106,12 +154,13 @@ export default function EventPage() {
                   </p>
 
                   <p className="event-desc">
-                    {event.description}
+                    {event.description
+                      ? event.description.slice(0, 120) + "..."
+                      : "No description available."}
                   </p>
 
-                  {/* 🔥 THIS IS IMPORTANT PART */}
-                  <Link 
-                    to={`/events/${event._id}`} 
+                  <Link
+                    to={`/events/${event._id}`}
                     className="event-btn"
                   >
                     View Details
@@ -122,6 +171,7 @@ export default function EventPage() {
               </div>
             ))
           )}
+
         </div>
 
       </div>

@@ -211,5 +211,39 @@ router.post("/add-job", auth, isAdmin, async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 });
+const Application = require("../models/Application");
+
+/* ========================================
+   GET ALL JOB APPLICATIONS (ADMIN)
+======================================== */
+router.get("/applications", auth, isAdmin, async (req, res) => {
+  try {
+    const applications = await Application.find()
+      .populate("jobId")
+      .sort({ appliedAt: -1 });
+
+    res.json(applications);
+  } catch (err) {
+    res.status(500).json({ message: "Server error" });
+  }
+});
+const EventRegistration = require("../models/EventRegistration");
+
+/* ========================================
+   GET EVENT REGISTRATIONS (ADMIN)
+======================================== */
+router.get("/event-registrations", auth, isAdmin, async (req, res) => {
+  try {
+    const data = await EventRegistration.find()
+      .populate("user")
+      .populate("event")
+      .sort({ registeredAt: -1 });
+
+    res.json(data);
+
+  } catch (err) {
+    res.status(500).json({ message: "Server error" });
+  }
+});
 
 module.exports = router;
