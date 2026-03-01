@@ -1,270 +1,133 @@
-.alumni-page {
-  background: #f4f6fa;
+.alumni-main {
   min-height: 100vh;
+  background: #f5f7fa;
   padding: 60px 20px;
 }
 
-.alumni-container {
-  max-width: 1100px;
+.alumni-grid {
+  max-width: 1200px;
   margin: auto;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
   gap: 40px;
 }
 
-/* LEFT SIDE */
-.alumni-left {
-  width: 320px;
+/* LEFT CARD */
+.alumni-card {
   background: white;
-  padding: 30px;
-  border-radius: 12px;
+  padding: 40px 25px;
+  border-radius: 15px;
   text-align: center;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
 }
 
-.alumni-avatar {
-  width: 100px;
-  height: 100px;
-  background: #ff8c00;
-  color: white;
-  font-size: 40px;
-  font-weight: bold;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 20px;
-}
-
-.alumni-badge {
-  color: #ff8c00;
-  font-weight: 600;
-  margin-bottom: 20px;
-}
-
-.alumni-data {
-  text-align: left;
+.alumni-image-box {
   margin-bottom: 15px;
 }
 
-.alumni-data strong {
-  display: block;
-  font-size: 13px;
-  color: #777;
+.alumni-image-box img {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #ff8c00;
 }
 
-.alumni-data span {
+.alumni-avatar {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ff8c00, #ff6a00);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 50px;
+  color: white;
+  margin: auto;
+}
+
+.upload-btn {
+  display: inline-block;
+  margin: 10px 0 20px;
+  background: #ff8c00;
+  color: white;
+  padding: 8px 18px;
+  border-radius: 25px;
+  cursor: pointer;
   font-size: 14px;
 }
 
-/* RIGHT SIDE */
-.alumni-right {
-  flex: 1;
-  background: white;
-  padding: 40px;
-  border-radius: 12px;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+.upload-btn:hover {
+  background: #ff7000;
 }
 
-.alumni-form {
+.alumni-role {
+  color: #ff8c00;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.alumni-info p {
+  font-size: 14px;
+  margin: 8px 0;
+}
+
+/* RIGHT FORM */
+.alumni-form-card {
+  background: white;
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+.alumni-form-card h2 {
+  margin-bottom: 25px;
+}
+
+.alumni-form-card form {
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
 
-.alumni-form input,
-.alumni-form textarea {
-  padding: 10px;
-  border-radius: 8px;
-  border: 1px solid #ddd;
-}
-
-.alumni-form textarea {
-  min-height: 80px;
-}
-
-.alumni-btn {
-  margin-top: 10px;
-  background: #ff8c00;
-  color: white;
-  border: none;
+.alumni-form-card input,
+.alumni-form-card textarea {
   padding: 12px;
   border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  outline: none;
+}
+
+.alumni-form-card textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.alumni-form-card input:focus,
+.alumni-form-card textarea:focus {
+  border-color: #ff8c00;
+}
+
+.alumni-save-btn {
+  background: #ff8c00;
+  color: white;
+  padding: 14px;
+  border: none;
+  border-radius: 30px;
   cursor: pointer;
   font-weight: 600;
+  margin-top: 10px;
+  transition: 0.3s;
 }
 
-.alumni-btn:hover {
-  background: #e67600;
+.alumni-save-btn:hover {
+  background: #ff6a00;
 }
 
+/* RESPONSIVE */
 @media (max-width: 900px) {
-  .alumni-container {
-    flex-direction: column;
-  }
-
-  .alumni-left {
-    width: 100%;
-  }
-}
-/* ===============================
-   LARGE DESKTOP (1400px+)
-================================= */
-@media (min-width: 1400px) {
-  .alumni-container {
-    max-width: 1300px;
-  }
-
-  .alumni-left {
-    width: 360px;
-  }
-
-  .alumni-avatar {
-    width: 120px;
-    height: 120px;
-    font-size: 48px;
-  }
-}
-
-/* ===============================
-   LAPTOP (1200px)
-================================= */
-@media (max-width: 1200px) {
-  .alumni-container {
-    gap: 30px;
-  }
-
-  .alumni-right {
-    padding: 35px;
-  }
-}
-
-/* ===============================
-   TABLET LANDSCAPE (992px)
-================================= */
-@media (max-width: 992px) {
-  .alumni-container {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .alumni-left {
-    width: 100%;
-    max-width: 500px;
-  }
-
-  .alumni-right {
-    width: 100%;
-  }
-}
-
-/* ===============================
-   TABLET PORTRAIT (768px)
-================================= */
-@media (max-width: 768px) {
-  .alumni-page {
-    padding: 40px 15px;
-  }
-
-  .alumni-right {
-    padding: 25px;
-  }
-
-  .alumni-avatar {
-    width: 90px;
-    height: 90px;
-    font-size: 32px;
-  }
-
-  .alumni-form input,
-  .alumni-form textarea {
-    font-size: 14px;
-  }
-
-  .alumni-btn {
-    padding: 10px;
-    font-size: 14px;
-  }
-}
-
-/* ===============================
-   MOBILE (576px)
-================================= */
-@media (max-width: 576px) {
-  .alumni-page {
-    padding: 30px 10px;
-  }
-
-  .alumni-left,
-  .alumni-right {
-    padding: 20px;
-  }
-
-  .alumni-left h2 {
-    font-size: 18px;
-  }
-
-  .alumni-badge {
-    font-size: 13px;
-  }
-
-  .alumni-data strong {
-    font-size: 12px;
-  }
-
-  .alumni-data span {
-    font-size: 13px;
-  }
-
-  .alumni-form label {
-    font-size: 13px;
-  }
-
-  .alumni-form input,
-  .alumni-form textarea {
-    padding: 8px;
-  }
-}
-
-/* ===============================
-   SMALL MOBILE (400px)
-================================= */
-@media (max-width: 400px) {
-  .alumni-avatar {
-    width: 75px;
-    height: 75px;
-    font-size: 26px;
-  }
-
-  .alumni-left h2 {
-    font-size: 16px;
-  }
-
-  .alumni-right h2 {
-    font-size: 18px;
-  }
-
-  .alumni-btn {
-    font-size: 13px;
-    padding: 8px;
-  }
-}
-
-/* ===============================
-   ULTRA SMALL DEVICES (350px)
-================================= */
-@media (max-width: 350px) {
-  .alumni-page {
-    padding: 20px 5px;
-  }
-
-  .alumni-left,
-  .alumni-right {
-    padding: 15px;
-  }
-
-  .alumni-avatar {
-    width: 65px;
-    height: 65px;
-    font-size: 22px;
+  .alumni-grid {
+    grid-template-columns: 1fr;
   }
 }
