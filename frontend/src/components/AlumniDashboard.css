@@ -1,133 +1,224 @@
-.alumni-main {
+/* =========================
+   RESET + GLOBAL FIX
+========================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #f3f2ef !important;
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* =========================
+   MAIN WRAPPER
+========================= */
+
+.alumni-1 {
   min-height: 100vh;
-  background: #f5f7fa;
-  padding: 60px 20px;
+  width: 100%;
+  background: #f3f2ef;
+  padding: 40px 20px;
+  display: flex;
+  justify-content: center;
 }
 
-.alumni-grid {
+/* =========================
+   GRID CONTAINER
+========================= */
+
+.alumni-2 {
+  width: 100%;
   max-width: 1200px;
-  margin: auto;
   display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 40px;
+  grid-template-columns: 340px 1fr;
+  gap: 30px;
 }
 
-/* LEFT CARD */
-.alumni-card {
-  background: white;
-  padding: 40px 25px;
-  border-radius: 15px;
+/* =========================
+   LEFT PROFILE CARD
+========================= */
+
+.alumni-3 {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 30px 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
   text-align: center;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  height: fit-content;
 }
 
-.alumni-image-box {
-  margin-bottom: 15px;
-}
-
-.alumni-image-box img {
+/* Profile Image */
+.alumni-img-wrapper {
   width: 130px;
   height: 130px;
+  margin: 0 auto 15px auto;
   border-radius: 50%;
-  object-fit: cover;
-  border: 4px solid #ff8c00;
-}
-
-.alumni-avatar {
-  width: 130px;
-  height: 130px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #ff8c00, #ff6a00);
+  overflow: hidden;
+  background: #ff9900;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 50px;
-  color: white;
-  margin: auto;
 }
 
-.upload-btn {
+.alumni-img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.alumni-avatar-letter {
+  font-size: 40px;
+  color: white;
+  font-weight: bold;
+}
+
+/* Upload Button */
+
+.alumni-upload-btn {
   display: inline-block;
-  margin: 10px 0 20px;
-  background: #ff8c00;
-  color: white;
-  padding: 8px 18px;
-  border-radius: 25px;
-  cursor: pointer;
+  margin-top: 10px;
+  margin-bottom: 20px;
   font-size: 14px;
+  color: #ff9900;
+  cursor: pointer;
+  font-weight: 600;
 }
 
-.upload-btn:hover {
-  background: #ff7000;
+/* Name + Role */
+
+.alumni-3 h2 {
+  font-size: 22px;
+  margin-bottom: 5px;
+  color: #222;
 }
 
 .alumni-role {
-  color: #ff8c00;
-  font-weight: 600;
-  margin-bottom: 15px;
-}
-
-.alumni-info p {
+  color: #ff9900;
   font-size: 14px;
-  margin: 8px 0;
+  margin-bottom: 20px;
+  font-weight: 600;
 }
 
-/* RIGHT FORM */
-.alumni-form-card {
-  background: white;
-  padding: 40px;
-  border-radius: 15px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+/* Info Section */
+
+.alumni-info-box {
+  text-align: left;
+  margin-top: 15px;
 }
 
-.alumni-form-card h2 {
+.alumni-info-box p {
+  margin-bottom: 12px;
+  font-size: 14px;
+  color: #444;
+}
+
+.alumni-info-box strong {
+  display: block;
+  font-size: 13px;
+  color: #888;
+}
+
+/* =========================
+   RIGHT FORM CARD
+========================= */
+
+.alumni-4 {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 35px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.alumni-4 h2 {
   margin-bottom: 25px;
+  font-size: 22px;
+  color: #222;
 }
 
-.alumni-form-card form {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
+/* Form Inputs */
 
-.alumni-form-card input,
-.alumni-form-card textarea {
-  padding: 12px;
+.alumni-4 input,
+.alumni-4 textarea {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 18px;
   border-radius: 8px;
   border: 1px solid #ddd;
   font-size: 14px;
-  outline: none;
+  transition: all 0.3s ease;
 }
 
-.alumni-form-card textarea {
+.alumni-4 input:focus,
+.alumni-4 textarea:focus {
+  outline: none;
+  border-color: #ff9900;
+  box-shadow: 0 0 0 3px rgba(255, 153, 0, 0.15);
+}
+
+.alumni-4 textarea {
   min-height: 100px;
   resize: vertical;
 }
 
-.alumni-form-card input:focus,
-.alumni-form-card textarea:focus {
-  border-color: #ff8c00;
-}
+/* Save Button */
 
 .alumni-save-btn {
-  background: #ff8c00;
-  color: white;
+  width: 100%;
   padding: 14px;
+  background: #ff9900;
   border: none;
   border-radius: 30px;
-  cursor: pointer;
+  font-size: 16px;
   font-weight: 600;
-  margin-top: 10px;
-  transition: 0.3s;
+  color: #fff;
+  cursor: pointer;
+  transition: 0.3s ease;
 }
 
 .alumni-save-btn:hover {
-  background: #ff6a00;
+  background: #e68900;
+  transform: translateY(-2px);
 }
 
-/* RESPONSIVE */
+/* =========================
+   RESPONSIVE DESIGN
+========================= */
+
+@media (max-width: 1024px) {
+  .alumni-2 {
+    grid-template-columns: 280px 1fr;
+  }
+}
+
 @media (max-width: 900px) {
-  .alumni-grid {
+  .alumni-2 {
     grid-template-columns: 1fr;
+  }
+
+  .alumni-3 {
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .alumni-1 {
+    padding: 20px 10px;
+  }
+
+  .alumni-4 {
+    padding: 25px;
+  }
+
+  .alumni-img-wrapper {
+    width: 110px;
+    height: 110px;
+  }
+
+  .alumni-avatar-letter {
+    font-size: 32px;
   }
 }
