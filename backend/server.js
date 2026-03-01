@@ -40,6 +40,7 @@ app.use("/api/jobs", require("./routes/jobs"));
 app.use("/api/jobs", jobRoutes);
 app.use("/uploads", express.static("uploads"));
 app.use("/api/applications", applicationRoutes);
+app.use("/api/dashboard", require("./routes/dashboard"));
 
 // =======================
 // ROOT
