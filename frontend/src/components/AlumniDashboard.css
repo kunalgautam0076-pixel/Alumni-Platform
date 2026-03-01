@@ -106,3 +106,165 @@
     width: 100%;
   }
 }
+/* ===============================
+   LARGE DESKTOP (1400px+)
+================================= */
+@media (min-width: 1400px) {
+  .alumni-container {
+    max-width: 1300px;
+  }
+
+  .alumni-left {
+    width: 360px;
+  }
+
+  .alumni-avatar {
+    width: 120px;
+    height: 120px;
+    font-size: 48px;
+  }
+}
+
+/* ===============================
+   LAPTOP (1200px)
+================================= */
+@media (max-width: 1200px) {
+  .alumni-container {
+    gap: 30px;
+  }
+
+  .alumni-right {
+    padding: 35px;
+  }
+}
+
+/* ===============================
+   TABLET LANDSCAPE (992px)
+================================= */
+@media (max-width: 992px) {
+  .alumni-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .alumni-left {
+    width: 100%;
+    max-width: 500px;
+  }
+
+  .alumni-right {
+    width: 100%;
+  }
+}
+
+/* ===============================
+   TABLET PORTRAIT (768px)
+================================= */
+@media (max-width: 768px) {
+  .alumni-page {
+    padding: 40px 15px;
+  }
+
+  .alumni-right {
+    padding: 25px;
+  }
+
+  .alumni-avatar {
+    width: 90px;
+    height: 90px;
+    font-size: 32px;
+  }
+
+  .alumni-form input,
+  .alumni-form textarea {
+    font-size: 14px;
+  }
+
+  .alumni-btn {
+    padding: 10px;
+    font-size: 14px;
+  }
+}
+
+/* ===============================
+   MOBILE (576px)
+================================= */
+@media (max-width: 576px) {
+  .alumni-page {
+    padding: 30px 10px;
+  }
+
+  .alumni-left,
+  .alumni-right {
+    padding: 20px;
+  }
+
+  .alumni-left h2 {
+    font-size: 18px;
+  }
+
+  .alumni-badge {
+    font-size: 13px;
+  }
+
+  .alumni-data strong {
+    font-size: 12px;
+  }
+
+  .alumni-data span {
+    font-size: 13px;
+  }
+
+  .alumni-form label {
+    font-size: 13px;
+  }
+
+  .alumni-form input,
+  .alumni-form textarea {
+    padding: 8px;
+  }
+}
+
+/* ===============================
+   SMALL MOBILE (400px)
+================================= */
+@media (max-width: 400px) {
+  .alumni-avatar {
+    width: 75px;
+    height: 75px;
+    font-size: 26px;
+  }
+
+  .alumni-left h2 {
+    font-size: 16px;
+  }
+
+  .alumni-right h2 {
+    font-size: 18px;
+  }
+
+  .alumni-btn {
+    font-size: 13px;
+    padding: 8px;
+  }
+}
+
+/* ===============================
+   ULTRA SMALL DEVICES (350px)
+================================= */
+@media (max-width: 350px) {
+  .alumni-page {
+    padding: 20px 5px;
+  }
+
+  .alumni-left,
+  .alumni-right {
+    padding: 15px;
+  }
+
+  .alumni-avatar {
+    width: 65px;
+    height: 65px;
+    font-size: 22px;
+  }
+}
