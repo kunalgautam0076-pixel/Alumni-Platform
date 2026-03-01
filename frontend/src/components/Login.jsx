@@ -12,21 +12,15 @@ export default function Login() {
   const { login } = useAuth();
   const navigate = useNavigate();
 
-  /* ================= AUTO REDIRECT IF LOGGED IN ================= */
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("alumni_user"));
-    if (user?.role === "admin") {
-      navigate("/admin");
-    } else if (user?.role === "alumni") {
-      navigate("/dashboard");
-    }
+    if (user?.role === "admin") navigate("/admin");
+    else if (user?.role === "alumni") navigate("/dashboard");
   }, [navigate]);
 
-  /* ================= INPUT CHANGE ================= */
   const onChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
 
-  /* ================= SUBMIT ================= */
   const submit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -34,14 +28,10 @@ export default function Login() {
 
     try {
       const res = await api.post("/api/auth/login", form);
-
       login(res.data);
 
-      if (res.data.user.role === "admin") {
-        navigate("/admin");
-      } else {
-        navigate("/dashboard");
-      }
+      if (res.data.user.role === "admin") navigate("/admin");
+      else navigate("/dashboard");
 
     } catch (err) {
       setMsg(err.response?.data?.message || "Invalid credentials");
@@ -51,47 +41,46 @@ export default function Login() {
   };
 
   return (
-    <div className="login-wrapper">
-      <div className="login-box">
-        <h2>Welcome Back 👋</h2>
-        <p className="subtitle">Login to continue to Alumni Platform</p>
+    <div className="login1-wrapper">
+      <div className="login1-card">
+        <h2 className="login1-title">Admin Login</h2>
 
-        <form onSubmit={submit}>
-          <div className="input-group">
-            <input
-              type="email"
-              name="email"
-              placeholder="Email Address"
-              value={form.email}
-              onChange={onChange}
-              required
-            />
-          </div>
+        <form onSubmit={submit} className="login1-form">
+          <input
+            type="email"
+            name="email"
+            placeholder="Email Address"
+            value={form.email}
+            onChange={onChange}
+            required
+            className="login1-input"
+          />
 
-          <div className="input-group">
-            <input
-              type="password"
-              name="password"
-              placeholder="Password"
-              value={form.password}
-              onChange={onChange}
-              required
-            />
-          </div>
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={form.password}
+            onChange={onChange}
+            required
+            className="login1-input"
+          />
 
-          {msg && <p className="error-msg">{msg}</p>}
+          {msg && <p className="login1-error">{msg}</p>}
 
-          <button type="submit" disabled={loading}>
+          <button type="submit" disabled={loading} className="login1-btn">
             {loading ? "Logging in..." : "Login"}
           </button>
         </form>
 
-        <p className="bottom-text">
-          Don’t have an account?{" "}
-          <span onClick={() => navigate("/register")}>
-            Register
+        <div className="login1-links">
+          <span onClick={() => navigate("/forgot-password")}>
+            Forgot Password?
           </span>
-        </p>
+          <span onClick={() => navigate("/register")}>
+            Create Account
+          </span>
+        </div>
       </div>
     </div>
   );

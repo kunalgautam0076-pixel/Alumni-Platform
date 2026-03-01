@@ -13,6 +13,8 @@ import Login from "./components/Login";
 import AlumniDashboard from "./components/AlumniDashboard";
 import AdminDashboard from "./components/AdminDashboard";
 import AdminRoute from "./components/AdminRoute";
+import ForgotPassword from "./components/ForgotPassword";
+import ResetPassword from "./components/ResetPassword";
 
 import EventPage from "./components/EventPage";
 import EventDetail from "./components/EventDetail";
@@ -51,6 +53,8 @@ export default function App() {
               </AdminRoute>
             }
           />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+<Route path="/reset-password/:token" element={<ResetPassword />} />
 
         </Routes>
       </main>
