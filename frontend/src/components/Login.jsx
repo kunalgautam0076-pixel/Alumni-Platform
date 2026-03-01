@@ -1,57 +1,96 @@
-import React, { useState } from 'react';
-import api from '../services/api';
-import { useAuth } from '../context/AuthContext';
-import { useNavigate } from 'react-router-dom';
-import './login.css'; // import the CSS file
+import React, { useState, useEffect } from "react";
+import api from "../services/api";
+import { useAuth } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
+import "./login.css";
 
 export default function Login() {
-  const [form, setForm] = useState({ email: '', password: '' });
-  const [msg, setMsg] = useState('');
+  const [form, setForm] = useState({ email: "", password: "" });
+  const [msg, setMsg] = useState("");
+  const [loading, setLoading] = useState(false);
+
   const { login } = useAuth();
   const navigate = useNavigate();
 
-  const onChange = e => setForm({ ...form, [e.target.name]: e.target.value });
+  /* ================= AUTO REDIRECT IF LOGGED IN ================= */
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("alumni_user"));
+    if (user?.role === "admin") {
+      navigate("/admin");
+    } else if (user?.role === "alumni") {
+      navigate("/dashboard");
+    }
+  }, [navigate]);
 
-  const submit = async e => {
+  /* ================= INPUT CHANGE ================= */
+  const onChange = (e) =>
+    setForm({ ...form, [e.target.name]: e.target.value });
+
+  /* ================= SUBMIT ================= */
+  const submit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    setMsg("");
+
     try {
-      const res = await api.post('/api/auth/login', form);
+      const res = await api.post("/api/auth/login", form);
+
       login(res.data);
-      setMsg('Logged in successfully!');
-      navigate('/');
+
+      if (res.data.user.role === "admin") {
+        navigate("/admin");
+      } else {
+        navigate("/dashboard");
+      }
+
     } catch (err) {
-      setMsg(err.response?.data?.message || 'Error logging in');
+      setMsg(err.response?.data?.message || "Invalid credentials");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="login-container">
-      <div className="login-card">
-        <h2 className="login-title">Welcome Back</h2>
-        <form onSubmit={submit} className="login-form">
-          <input
-            name="email"
-            type="email"
-            placeholder="Email"
-            value={form.email}
-            onChange={onChange}
-            required
-            className="login-input"
-          />
-          <input
-            name="password"
-            type="password"
-            placeholder="Password"
-            value={form.password}
-            onChange={onChange}
-            required
-            className="login-input"
-          />
-          <button type="submit" className="login-button">Login</button>
+    <div className="login-wrapper">
+      <div className="login-box">
+        <h2>Welcome Back 👋</h2>
+        <p className="subtitle">Login to continue to Alumni Platform</p>
+
+        <form onSubmit={submit}>
+          <div className="input-group">
+            <input
+              type="email"
+              name="email"
+              placeholder="Email Address"
+              value={form.email}
+              onChange={onChange}
+              required
+            />
+          </div>
+
+          <div className="input-group">
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              value={form.password}
+              onChange={onChange}
+              required
+            />
+          </div>
+
+          {msg && <p className="error-msg">{msg}</p>}
+
+          <button type="submit" disabled={loading}>
+            {loading ? "Logging in..." : "Login"}
+          </button>
         </form>
-        {msg && <p className="login-msg">{msg}</p>}
-        <p className="login-footer">
-          Don't have an account? <span className="signup-link">Sign Up</span>
+
+        <p className="bottom-text">
+          Don’t have an account?{" "}
+          <span onClick={() => navigate("/register")}>
+            Register
+          </span>
         </p>
       </div>
     </div>

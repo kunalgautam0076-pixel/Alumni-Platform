@@ -12,6 +12,7 @@ import Register from "./components/Register";
 import Login from "./components/Login";
 import AlumniDashboard from "./components/AlumniDashboard";
 import AdminDashboard from "./components/AdminDashboard";
+import AdminRoute from "./components/AdminRoute";
 
 import EventPage from "./components/EventPage";
 import EventDetail from "./components/EventDetail";
@@ -24,24 +25,33 @@ export default function App() {
 
       <main>
         <Routes>
-          {/* PUBLIC ROUTES */}
+
+          {/* ================= PUBLIC ROUTES ================= */}
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/alumni" element={<AlumniList />} />
           <Route path="/alumni/:id" element={<AlumniProfile />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
-
-          {/* DASHBOARDS */}
-          <Route path="/dashboard" element={<AlumniDashboard />} />
-          <Route path="/admin" element={<AdminDashboard />} />
-
-          {/* EVENTS */}
           <Route path="/events" element={<EventPage />} />
           <Route path="/events/:id" element={<EventDetail />} />
-
-          {/* JOBS */}
           <Route path="/jobs" element={<JobPage />} />
+
+          {/* ================= DASHBOARD ROUTES ================= */}
+
+          {/* Alumni Dashboard (Optional Protection) */}
+          <Route path="/dashboard" element={<AlumniDashboard />} />
+
+          {/* Admin Protected Route */}
+          <Route
+            path="/admin"
+            element={
+              <AdminRoute>
+                <AdminDashboard />
+              </AdminRoute>
+            }
+          />
+
         </Routes>
       </main>
     </>
