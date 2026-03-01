@@ -1,34 +1,40 @@
-import React, { createContext, useContext, useEffect, useState } from 'react'
-import api from '../services/api'
+import { createContext, useContext, useState, useEffect } from "react";
 
-const AuthContext = createContext()
+const AuthContext = createContext();
 
-export const AuthProvider = ({children})=>{
-  const [user, setUser] = useState(()=>{
-    const raw = localStorage.getItem('alumni_user')
-    return raw ? JSON.parse(raw) : null
-  })
+export const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
 
-  useEffect(()=>{
-    const token = localStorage.getItem('alumni_token')
-    if (token) api.defaults.headers.common['Authorization'] = `Bearer ${token}`
-  }, [])
+  useEffect(() => {
+    const savedUser = localStorage.getItem("alumni_user");
+    if (savedUser) {
+      setUser(JSON.parse(savedUser));
+    }
+  }, []);
 
-  const login = (data)=>{
-    localStorage.setItem('alumni_token', data.token)
-    localStorage.setItem('alumni_user', JSON.stringify(data.user))
-    api.defaults.headers.common['Authorization'] = `Bearer ${data.token}`
-    setUser(data.user)
-  }
+  const login = (data) => {
+    console.log("LOGIN DATA:", data); // 🔥 debug
 
-  const logout = ()=>{
-    localStorage.removeItem('alumni_token')
-    localStorage.removeItem('alumni_user')
-    delete api.defaults.headers.common['Authorization']
-    setUser(null)
-  }
+    // 🔥 STORE TOKEN PROPERLY
+    localStorage.setItem("token", data.token);
 
-  return <AuthContext.Provider value={{user, login, logout}}>{children}</AuthContext.Provider>
-}
+    // 🔥 STORE USER
+    localStorage.setItem("alumni_user", JSON.stringify(data.user));
 
-export const useAuth = ()=> useContext(AuthContext)
+    setUser(data.user);
+  };
+
+  const logout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("alumni_user");
+    setUser(null);
+  };
+
+  return (
+    <AuthContext.Provider value={{ user, login, logout }}>
+      {children}
+    </AuthContext.Provider>
+  );
+};
+
+export const useAuth = () => useContext(AuthContext);

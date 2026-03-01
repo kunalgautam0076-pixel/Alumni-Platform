@@ -20,30 +20,35 @@ export default function Login() {
 
   const onChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
+const submit = async (e) => {
+  e.preventDefault();
+  setLoading(true);
+  setMsg("");
 
-  const submit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setMsg("");
+  try {
+    const res = await api.post("/api/auth/login", form);
 
-    try {
-      const res = await api.post("/api/auth/login", form);
-      login(res.data);
+    console.log("SERVER RESPONSE:", res.data); // 🔥 debug
 
-      if (res.data.user.role === "admin") navigate("/admin");
-      else navigate("/dashboard");
+    login(res.data); // VERY IMPORTANT
 
-    } catch (err) {
-      setMsg(err.response?.data?.message || "Invalid credentials");
-    } finally {
-      setLoading(false);
+    if (res.data.user.role === "admin") {
+      navigate("/admin");
+    } else {
+      navigate("/dashboard");
     }
-  };
+
+  } catch (err) {
+    setMsg(err.response?.data?.message || "Invalid credentials");
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <div className="login1-wrapper">
       <div className="login1-card">
-        <h2 className="login1-title">Admin Login</h2>
+        <h2 className="login1-title">Login</h2>
 
         <form onSubmit={submit} className="login1-form">
           <input
