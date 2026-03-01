@@ -2,7 +2,8 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const connectDB = require("./config/db");
-
+const jobRoutes = require("./routes/jobs");
+const applicationRoutes = require("./routes/applications");
 const app = express();
 
 // =======================
@@ -36,6 +37,9 @@ app.use("/api/alumni", require("./routes/alumni"));
 app.use("/api/admin", require("./routes/admin"));
 app.use("/api/events", require("./routes/events"));
 app.use("/api/jobs", require("./routes/jobs"));
+app.use("/api/jobs", jobRoutes);
+app.use("/uploads", express.static("uploads"));
+app.use("/api/applications", applicationRoutes);
 
 // =======================
 // ROOT

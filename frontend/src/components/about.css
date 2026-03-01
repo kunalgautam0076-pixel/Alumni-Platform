@@ -1,12 +1,5 @@
 /* ===============================
-   ABOUT PAGE BASE (Scoped)
-================================= */
-/* =======================================
-   FULL WIDTH HERO SECTION (FINAL)
-======================================= */
-
-/* ===============================
-   FULL WIDTH HERO (WORKING)
+   ABOUT PAGE BASE
 ================================= */
 
 .about-page {
@@ -14,18 +7,21 @@
   overflow-x: hidden;
 }
 
-/* Remove any default margin */
 body {
   margin: 0;
+  font-family: "Poppins", sans-serif;
 }
 
-/* HERO */
+/* ===============================
+   HERO SECTION
+================================= */
+
 .about-page .about-hero {
   position: relative;
-  width: 100vw;              /* FULL WIDTH */
+  width: 100vw;
   height: 100vh;
   min-height: 600px;
-  background-image: url("https://www.sbjit.edu.in/wp-content/uploads/2021/07/DSC9704a.jpg");  /* LOCAL IMAGE */
+  background-image: url("https://www.sbjit.edu.in/wp-content/uploads/2021/07/DSC9704a.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -35,17 +31,15 @@ body {
   justify-content: center;
   text-align: center;
 
-  margin-left: calc(-50vw + 50%);  /* IMPORTANT FULL WIDTH FIX */
+  margin-left: calc(-50vw + 50%);
 }
 
-/* DARK OVERLAY */
 .about-page .hero-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.65);
 }
 
-/* TEXT */
 .about-page .about-hero-content {
   position: relative;
   z-index: 2;
@@ -64,25 +58,6 @@ body {
   font-size: 20px;
   line-height: 1.8;
   opacity: 0.95;
-}
-
-/* ===============================
-   HERO SECTION
-================================= */
-
-
-.about-page .about-hero h1 {
-  font-size: 42px;
-  margin-bottom: 20px;
-  font-weight: 700;
-}
-
-.about-page .about-hero p {
-  max-width: 750px;
-  margin: 0 auto;
-  font-size: 18px;
-  opacity: 0.9;
-  line-height: 1.7;
 }
 
 /* ===============================
@@ -120,7 +95,7 @@ body {
 }
 
 /* ===============================
-   GLASS IMAGE CARD
+   GLASS CARD
 ================================= */
 
 .about-page .glass-card {
@@ -154,7 +129,7 @@ body {
 }
 
 /* ===============================
-   STATS SECTION
+   STATS
 ================================= */
 
 .about-page .about-stats {
@@ -184,7 +159,7 @@ body {
 }
 
 /* ===============================
-   VALUES SECTION
+   VALUES
 ================================= */
 
 .about-page .about-values {
@@ -234,7 +209,7 @@ body {
 }
 
 /* ===============================
-   CTA SECTION
+   CTA
 ================================= */
 
 .about-page .about-cta {
@@ -270,7 +245,13 @@ body {
   transform: translateY(-3px);
 }
 
+/* ==========================================
+   RESPONSIVE DESIGN
+========================================== */
+
+/* ===== Tablet ===== */
 @media (max-width: 1024px) {
+
   .about-page .about-hero {
     height: 75vh;
   }
@@ -282,9 +263,35 @@ body {
   .about-page .about-hero-content p {
     font-size: 17px;
   }
+
+  .about-page .about-section {
+    gap: 40px;
+    padding: 80px 6%;
+  }
+
+  .about-page .glass-card {
+    height: 300px;
+  }
 }
 
-@media (max-width: 600px) {
+/* ===== Mobile ===== */
+@media (max-width: 768px) {
+
+  .about-page .about-section {
+    flex-direction: column !important;
+    text-align: center;
+    padding: 70px 6%;
+  }
+
+  .about-page .about-text {
+    max-width: 100%;
+  }
+
+  .about-page .glass-card {
+    max-width: 100%;
+    width: 100%;
+    height: 250px;
+  }
 
   .about-page .about-hero {
     height: 65vh;
@@ -292,38 +299,18 @@ body {
   }
 
   .about-page .about-hero-content h1 {
-    font-size: 26px;
+    font-size: 28px;
   }
 
   .about-page .about-hero-content p {
     font-size: 14px;
   }
-}
-@media (max-width: 1024px) {
-  .about-page .about-hero {
-    height: 75vh;
+
+  .about-page .about-values {
+    padding: 80px 6%;
   }
 
-  .about-page .about-hero-content h1 {
-    font-size: 40px;
-  }
-
-  .about-page .about-hero-content p {
-    font-size: 17px;
-  }
-}
-
-@media (max-width: 600px) {
-  .about-page .about-hero {
-    height: 65vh;
-    min-height: 450px;
-  }
-
-  .about-page .about-hero-content h1 {
-    font-size: 26px;
-  }
-
-  .about-page .about-hero-content p {
-    font-size: 14px;
+  .about-page .about-cta {
+    padding: 80px 20px;
   }
 }

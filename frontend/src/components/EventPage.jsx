@@ -6,6 +6,13 @@ import { Link } from "react-router-dom";
 export default function EventPage() {
   const [events, setEvents] = useState([]);
   const [filter, setFilter] = useState("all");
+  const [theme, setTheme] = useState("light");
+
+  useEffect(() => {
+  document.body.classList.remove("dark", "vision");
+  if (theme === "dark") document.body.classList.add("dark");
+  if (theme === "vision") document.body.classList.add("vision");
+}, [theme]);
 
   useEffect(() => {
     api
