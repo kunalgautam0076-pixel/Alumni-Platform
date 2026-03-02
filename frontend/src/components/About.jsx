@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import "./about.css";
+import "./About.css";
 
 /* ===== Animated Counter ===== */
 const Counter = ({ target }) => {

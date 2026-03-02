@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import api from "../services/api";
-import "./register.css";
+import "./Register.css";
 
 export default function Register() {
   const [form, setForm] = useState({

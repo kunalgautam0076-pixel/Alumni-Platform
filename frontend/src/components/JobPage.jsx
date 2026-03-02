@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import api from "../services/api";
-import "./jobpage.css";
+import "./Jobpage.css";
 
 export default function JobPage() {
   const [jobs, setJobs] = useState([]);
@@ -44,8 +44,8 @@ export default function JobPage() {
     try {
       const token = localStorage.getItem("token");
 
-      const res = await fetch(
-        `http://localhost:5000/api/jobs/apply/${selectedJob._id}`,
+        const res = await fetch(
+          `http://localhost:5000/api/jobs/apply/${selectedJob._id}`,
         {
           method: "POST",
           headers: {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./eventpage.css";
+import "./Eventpage.css";
 import api from "../services/api";
 import { Link } from "react-router-dom";
 

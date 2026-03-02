@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import api from "../services/api";
-import "./adminDashboard.css";
+import "./AdminDashboard.css";
 
 export default function AdminDashboard() {
   const [activeTab, setActiveTab] = useState("dashboard");
