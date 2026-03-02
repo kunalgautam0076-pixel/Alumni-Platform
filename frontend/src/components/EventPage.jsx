@@ -23,40 +23,56 @@ export default function EventPage() {
      FETCH EVENTS
   =============================== */
   useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        setLoading(true);
+        const res = await api.get("/api/events");
+
+        console.log("EVENT DATA:", res.data);
+
+        setEvents(res.data || []);
+        setError("");
+      } catch (err) {
+        console.error("Error fetching events:", err);
+        setError("Failed to load events");
+      } finally {
+        setLoading(false);
+      }
+    };
+
     fetchEvents();
   }, []);
 
-  const fetchEvents = async () => {
-    try {
-      setLoading(true);
-      const res = await api.get("/api/events");
-      setEvents(res.data);
-      setLoading(false);
-    } catch (err) {
-      console.log(err);
-      setError("Failed to load events");
-      setLoading(false);
-    }
-  };
-
   /* ===============================
-     FILTER LOGIC
+     FILTER LOGIC (Timezone Safe)
   =============================== */
-  const today = new Date();
-
- const filteredEvents = events.filter((event) => {
+  const filteredEvents = events.filter((event) => {
   if (!event.date) return false;
 
   const eventDate = new Date(event.date);
+  const today = new Date();
+
+  // Remove time part (VERY IMPORTANT)
+  const eventOnlyDate = new Date(
+    eventDate.getFullYear(),
+    eventDate.getMonth(),
+    eventDate.getDate()
+  );
+
+  const todayOnlyDate = new Date(
+    today.getFullYear(),
+    today.getMonth(),
+    today.getDate()
+  );
 
   if (filter === "all") return true;
 
   if (filter === "upcoming") {
-    return eventDate.getTime() >= today.getTime();
+    return eventOnlyDate >= todayOnlyDate;
   }
 
   if (filter === "past") {
-    return eventDate.getTime() < today.getTime();
+    return eventOnlyDate < todayOnlyDate;
   }
 
   return true;
@@ -64,7 +80,6 @@ export default function EventPage() {
 
   return (
     <div className="event-page">
-
       {/* HERO SECTION */}
       <div className="event-hero">
         <div className="hero-overlay"></div>
@@ -79,7 +94,6 @@ export default function EventPage() {
 
       {/* EVENTS SECTION */}
       <div className="event-wrapper">
-
         <div className="event-top">
           <h2 className="section-title">Explore Events</h2>
 
@@ -109,7 +123,6 @@ export default function EventPage() {
 
         {/* EVENT GRID */}
         <div className="event-grid">
-
           {loading ? (
             <div className="no-events">
               <h3>Loading events...</h3>
@@ -126,12 +139,11 @@ export default function EventPage() {
           ) : (
             filteredEvents.map((event) => (
               <div className="event-card" key={event._id}>
-
                 <div className="event-image">
                   <img
                     src={
                       event.image
-                        ? event.image
+                        ? `http://localhost:5000/uploads/${event.image}`
                         : "https://images.unsplash.com/photo-1492684223066-81342ee5ff30"
                     }
                     alt={event.title}
@@ -165,17 +177,12 @@ export default function EventPage() {
                   >
                     View Details
                   </Link>
-
                 </div>
-
               </div>
             ))
           )}
-
         </div>
-
       </div>
-
     </div>
   );
 }

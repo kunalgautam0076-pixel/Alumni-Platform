@@ -1,65 +1,105 @@
+/* ==============================
+   JOB PAGE GLOBAL
+============================== */
+
 .job-page {
-  width: 100%;
-  padding-bottom: 80px;
-  background: #f5f7fb;
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  min-height: 100vh;
+  padding-bottom: 100px;
+  font-family: "Poppins", sans-serif;
+  color: #fff;
 }
 
-/* HERO */
+/* ==============================
+   HERO SECTION
+============================== */
+
 .job-hero {
+  padding: 120px 20px 60px;
   text-align: center;
-  padding: 100px 20px;
-  background: linear-gradient(135deg, #0f172a, #1e293b);
-  color: white;
 }
 
 .job-hero h1 {
-  font-size: 48px;
+  font-size: 42px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  background: linear-gradient(90deg, #ff9800, #ff5722);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .job-hero p {
   opacity: 0.8;
-  margin-top: 10px;
+  font-size: 16px;
 }
 
-/* FILTERS */
+/* ==============================
+   FILTER SECTION
+============================== */
+
 .job-filters {
+  max-width: 900px;
+  margin: 0 auto 50px;
   display: flex;
-  justify-content: center;
-  gap: 20px;
   flex-wrap: wrap;
-  padding: 40px 20px;
+  gap: 20px;
+  justify-content: center;
 }
 
 .job-filters input,
 .job-filters select {
-  padding: 12px 15px;
-  border-radius: 8px;
-  border: 1px solid #ddd;
-  min-width: 200px;
+  padding: 12px 18px;
+  border-radius: 12px;
+  border: none;
+  outline: none;
+  min-width: 220px;
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+  backdrop-filter: blur(10px);
+  transition: 0.3s ease;
 }
 
-/* GRID */
+.job-filters input::placeholder {
+  color: rgba(255,255,255,0.5);
+}
+
+.job-filters input:focus,
+.job-filters select:focus {
+  background: rgba(255,255,255,0.15);
+}
+
+/* ==============================
+   JOB GRID
+============================== */
+
 .job-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 30px;
-  padding: 0 8%;
-}
-
-/* CARD */
-.job-card {
-  background: white;
-  padding: 25px;
-  border-radius: 14px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-  transition: 0.3s;
+  max-width: 1100px;
+  margin: auto;
   display: flex;
   flex-direction: column;
+  gap: 35px;
+  padding: 0 20px;
+}
+
+/* ==============================
+   JOB CARD
+============================== */
+
+.job-card {
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  padding: 30px;
+  transition: 0.4s ease;
+  border: 1px solid rgba(255,255,255,0.1);
 }
 
 .job-card:hover {
-  transform: translateY(-6px);
+  transform: translateY(-8px);
+  box-shadow: 0 25px 60px rgba(0,0,0,0.4);
 }
+
+/* TOP SECTION */
 
 .job-top {
   display: flex;
@@ -67,112 +107,250 @@
   align-items: center;
 }
 
+.job-top h2 {
+  font-size: 24px;
+}
+
 .badge {
-  background: #ff9800;
-  color: white;
-  padding: 5px 10px;
+  background: linear-gradient(90deg, #ff9800, #ff5722);
+  padding: 6px 14px;
   border-radius: 20px;
   font-size: 12px;
+  font-weight: 600;
+  color: white;
+}
+
+/* INFO */
+
+.job-card h4 {
+  margin: 8px 0;
+  font-weight: 500;
+  opacity: 0.9;
 }
 
 .location,
 .salary {
   font-size: 14px;
-  margin: 5px 0;
+  opacity: 0.7;
+  margin-bottom: 5px;
 }
 
 .desc {
-  font-size: 14px;
   margin: 15px 0;
-  flex-grow: 1;
+  line-height: 1.6;
+  opacity: 0.85;
 }
+
+/* SKILLS */
 
 .skills {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+  margin-bottom: 20px;
 }
 
 .skills span {
-  background: #eef2ff;
-  padding: 5px 10px;
+  background: rgba(255,255,255,0.15);
+  padding: 5px 12px;
   border-radius: 15px;
   font-size: 12px;
 }
 
-.apply-btn {
-  margin-top: 15px;
-  padding: 12px;
-  border: none;
-  background: #0f172a;
-  color: white;
-  border-radius: 8px;
-  cursor: pointer;
-}
 
-.apply-btn:hover {
-  background: #ff9800;
-}
 
-/* MOBILE */
-@media(max-width:768px){
-  .job-hero h1{
-    font-size: 28px;
-  }
 
-  .job-grid{
-    padding: 0 5%;
-  }
-}
+
+/* ==============================
+   MODAL
+============================== */
+
 .apply-modal {
   position: fixed;
   inset: 0;
   background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(8px);
   display: flex;
-  justify-content: center;
   align-items: center;
-  z-index: 999;
+  justify-content: center;
+  z-index: 1000;
 }
 
 .modal-content {
-  background: white;
-  padding: 30px;
-  width: 95%;
+  background: #111827;
+  padding: 40px;
+  border-radius: 20px;
+  width: 90%;
   max-width: 500px;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+}
+
+.modal-content h2 {
+  margin-bottom: 20px;
 }
 
 .modal-content input,
 .modal-content textarea {
-  padding: 10px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  background: #1f2937;
+  color: white;
 }
 
 .modal-content textarea {
-  min-height: 80px;
+  min-height: 100px;
+  resize: none;
 }
 
 .modal-actions {
   display: flex;
   justify-content: space-between;
+  margin-top: 10px;
 }
 
 .modal-actions button {
-  padding: 10px 15px;
+  padding: 10px 20px;
+  border-radius: 8px;
   border: none;
   cursor: pointer;
-  border-radius: 6px;
 }
 
 .modal-actions button:first-child {
-  background: #ccc;
+  background: #374151;
+  color: white;
 }
 
 .modal-actions button:last-child {
-  background: #0f172a;
+  background: linear-gradient(90deg, #ff9800, #ff5722);
   color: white;
+}
+
+/* ==============================
+   RESPONSIVE
+============================== */
+
+@media (max-width: 768px) {
+  .job-top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .job-hero h1 {
+    font-size: 30px;
+  }
+}
+
+/* FIX SELECT DROPDOWN WHITE ISSUE */
+
+.job-filters select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+  border-radius: 12px;
+  padding: 12px 18px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+/* Dropdown options dark */
+.job-filters select option {
+  background-color: #1e293b;
+  color: #ffffff;
+}
+
+.job-filters {
+  max-width: 900px;
+  margin: 0 auto 50px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.job-filters select {
+  grid-column: span 2;
+  justify-self: center;
+  width: 250px;
+}
+
+.apply-btn12{
+  width: 20%;
+  padding: 10px;
+  border-radius: 40px;
+  border: none;
+  background: linear-gradient(90deg, #0ea5e9, #2563eb);
+  color: white;
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  text-align: center;
+}
+
+.apply-btn:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 15px 35px rgba(37,99,235,0.5);
+}
+.badge {
+  background: linear-gradient(90deg, #ff9800, #ff5722);
+  padding: 6px 16px;
+  border-radius: 25px;
+  font-size: 12px;
+  font-weight: 600;
+  color: white;
+  box-shadow: 0 5px 15px rgba(255, 87, 34, 0.4);
+}
+/* ==============================
+   MOBILE FIX (IMPORTANT)
+============================== */
+
+@media (max-width: 768px) {
+
+  /* Card spacing */
+  .job-card {
+    padding: 22px;
+  }
+
+  /* Stack top section properly */
+  .job-top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  /* Fix Apply Button */
+  .apply-btn12{
+    width: 100%;
+    border-radius: 30px;
+    padding: 14px;
+    font-size: 15px;
+    text-align: center;
+  }
+
+  /* Prevent vertical weird shape */
+  .apply-btn {
+    display: block;
+  }
+
+  /* Filters stack */
+  .job-filters {
+    grid-template-columns: 1fr;
+  }
+
+  .job-filters select {
+    grid-column: span 1;
+    width: 100%;
+  }
+
+  /* Hero font adjust */
+  .job-hero h1 {
+    font-size: 28px;
+  }
+
 }

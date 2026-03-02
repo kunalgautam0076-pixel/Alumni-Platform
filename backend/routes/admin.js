@@ -141,12 +141,12 @@ router.post("/add-event", auth, isAdmin, async (req, res) => {
     }
 
     const newEvent = new Event({
-      title,
-      description,
-      date,
-      location,
-      image,
-    });
+  title,
+  description,
+  date: new Date(date), // 🔥 IMPORTANT FIX
+  location,
+  image,
+});
 
     await newEvent.save();
 

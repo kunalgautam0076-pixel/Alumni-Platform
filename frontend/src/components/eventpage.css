@@ -410,9 +410,7 @@
   flex-direction: column;
   position: relative;
 }
-.event-card {
-  animation: floatCard 6s ease-in-out infinite;
-}
+
 
 @keyframes floatCard {
   0% { transform: translateY(0px); }
@@ -499,4 +497,11 @@ body.vision .event-btn:hover {
 body.vision .section-title {
   text-shadow: 0 0 12px rgba(0,150,255,0.6);
 }
-  
+
+
+.event-card {
+  opacity: 0;
+  transform: translateY(40px);
+  animation: fadeUpCard 0.8s ease forwards,
+             floatCard 6s ease-in-out 1s infinite;
+}

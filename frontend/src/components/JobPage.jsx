@@ -136,7 +136,7 @@ export default function JobPage() {
               </div>
 
               <button
-                className="apply-btn"
+                className="apply-btn12"
                 onClick={() => setSelectedJob(job)}
               >
                 Apply Now 🚀

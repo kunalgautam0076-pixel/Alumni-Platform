@@ -1,183 +1,206 @@
-/* ===============================
-   LOADING / ERROR
-================================= */
+/* =====================================
+   DANGEROUS EVENT DETAIL UI
+===================================== */
 
-.loading,
-.error {
-  padding: 150px 0;
-  text-align: center;
-  font-size: 20px;
+.danger-event-wrapper {
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  min-height: 100vh;
+  color: #fff;
+  font-family: "Poppins", sans-serif;
 }
 
-/* ===============================
-   HERO
-================================= */
+/* HERO */
 
-.detail-hero {
+.danger-hero-section {
   position: relative;
-  height: 85vh;
-  min-height: 600px;
+  height: 75vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
 }
 
-.detail-hero img {
+.danger-hero-image {
+  position: absolute;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  animation: zoomHero 12s ease-in-out infinite alternate;
 }
 
-.detail-hero .overlay {
+@keyframes zoomHero {
+  from { transform: scale(1); }
+  to { transform: scale(1.1); }
+}
+
+.danger-overlay {
   position: absolute;
   inset: 0;
   background: linear-gradient(
     rgba(0,0,0,0.7),
-    rgba(0,0,0,0.85)
+    rgba(0,0,0,0.6)
   );
 }
 
-.hero-content {
-  position: absolute;
-  bottom: 80px;
-  left: 8%;
+.danger-hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 800px;
+  padding: 20px;
+}
+
+.danger-back-btn {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 8px 18px;
+  border-radius: 25px;
   color: #fff;
-  max-width: 700px;
-}
-
-.hero-content h1 {
-  font-size: 48px;
-  margin-bottom: 15px;
-}
-
-.location {
-  margin-bottom: 30px;
-  font-size: 18px;
-}
-
-/* BACK BUTTON */
-
-.back-btn {
-  margin-bottom: 20px;
-  background: transparent;
-  border: 1px solid #fff;
-  color: #fff;
-  padding: 8px 20px;
-  border-radius: 30px;
   cursor: pointer;
+  margin-bottom: 20px;
+  transition: 0.3s ease;
+}
+
+.danger-back-btn:hover {
+  background: #ff9800;
+}
+
+.danger-title {
+  font-size: 42px;
+  margin-bottom: 10px;
+  text-shadow: 0 0 20px rgba(255,152,0,0.6);
+}
+
+.danger-location {
+  margin-bottom: 25px;
+  opacity: 0.85;
 }
 
 /* COUNTDOWN */
 
-.countdown {
+.danger-countdown-box {
   display: flex;
+  justify-content: center;
   gap: 20px;
+  flex-wrap: wrap;
 }
 
-.countdown div {
+.danger-countdown-box div {
   background: rgba(255,255,255,0.1);
-  backdrop-filter: blur(8px);
   padding: 15px 20px;
-  border-radius: 12px;
+  border-radius: 15px;
   text-align: center;
+  backdrop-filter: blur(15px);
 }
 
-.countdown span {
+.danger-countdown-box span {
+  font-size: 22px;
+  font-weight: 700;
   display: block;
-  font-size: 26px;
-  font-weight: bold;
+  color: #ff9800;
 }
 
-/* ===============================
-   CONTENT SECTION
-================================= */
+/* CONTENT */
 
-.detail-content-section {
-  padding: 100px 8%;
-  background: #f9f9f9;
+.danger-content-area {
+  padding: 80px 8%;
 }
 
-.detail-info {
-  max-width: 800px;
+.danger-description {
   margin-bottom: 60px;
 }
 
-.detail-info h2 {
-  margin-bottom: 20px;
-  font-size: 30px;
+.danger-description h2 {
+  font-size: 28px;
+  margin-bottom: 15px;
 }
 
-.detail-info p {
-  line-height: 1.7;
-  color: #555;
+.danger-description p {
+  line-height: 1.8;
+  opacity: 0.85;
 }
 
 /* META CARDS */
 
-.event-meta-cards {
-  display: flex;
+.danger-meta-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 30px;
-  flex-wrap: wrap;
   margin-bottom: 60px;
 }
 
-.meta-card {
-  flex: 1;
-  min-width: 250px;
-  background: #fff;
+.danger-meta-card {
+  background: rgba(255,255,255,0.08);
   padding: 30px;
-  border-radius: 15px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-  transition: 0.3s;
+  border-radius: 20px;
+  backdrop-filter: blur(20px);
+  transition: 0.4s ease;
 }
 
-.meta-card:hover {
-  transform: translateY(-5px);
-}
-
-.meta-card h4 {
-  margin-bottom: 10px;
+.danger-meta-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5);
 }
 
 /* CTA */
 
-.cta-section {
+.danger-cta {
   text-align: center;
-  padding: 60px 0;
 }
 
-.register-btn {
-  padding: 12px 35px;
-  border-radius: 30px;
+.danger-register-btn {
+  margin-top: 20px;
+  padding: 14px 35px;
+  border-radius: 40px;
   border: none;
-  background: #000;
-  color: #fff;
+  background: linear-gradient(90deg, #ff9800, #ff5722);
+  color: white;
+  font-weight: 600;
+  font-size: 16px;
   cursor: pointer;
-  transition: 0.3s;
+  transition: 0.4s ease;
 }
 
-.register-btn:hover {
-  background: #ff9800;
+.danger-register-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 15px 40px rgba(255,87,34,0.5);
 }
 
-/* ===============================
-   RESPONSIVE
-================================= */
+/* LOADER */
 
-@media (max-width: 900px) {
+.danger-loader,
+.danger-error {
+  text-align: center;
+  padding: 120px;
+  font-size: 22px;
+}
 
-  .hero-content {
-    left: 5%;
-    bottom: 50px;
+/* RESPONSIVE */
+
+@media (max-width: 1024px) {
+  .danger-meta-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .danger-hero-section {
+    height: 60vh;
   }
 
-  .hero-content h1 {
-    font-size: 30px;
+  .danger-title {
+    font-size: 28px;
   }
 
-  .countdown {
-    flex-wrap: wrap;
+  .danger-meta-grid {
+    grid-template-columns: 1fr;
   }
 
-  .event-meta-cards {
-    flex-direction: column;
+  .danger-content-area {
+    padding: 60px 5%;
+  }
+
+  .danger-countdown-box {
+    gap: 12px;
   }
 }
