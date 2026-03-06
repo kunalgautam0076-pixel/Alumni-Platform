@@ -1,0 +1,47 @@
+.admin-dashboard-wrapper{
+display:flex;
+background:#111;
+min-height:100vh;
+color:white;
+}
+
+.admin-dashboard-content{
+margin-left:240px;
+padding:120px 50px 50px 50px;
+width:100%;
+}
+
+.admin-dashboard-title{
+font-size:30px;
+margin-bottom:40px;
+font-weight:600;
+}
+
+.admin-dashboard-stats{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:25px;
+}
+
+.admin-dashboard-card{
+background:#1b1b1b;
+padding:30px;
+border-radius:12px;
+text-align:center;
+transition:0.3s;
+}
+
+.admin-dashboard-card h3{
+font-size:34px;
+color:#ff9800;
+}
+
+.admin-dashboard-card p{
+margin-top:6px;
+opacity:0.8;
+}
+
+.admin-dashboard-card:hover{
+transform:translateY(-6px);
+box-shadow:0 10px 30px rgba(255,152,0,0.25);
+}
