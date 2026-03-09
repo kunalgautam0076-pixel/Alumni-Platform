@@ -1,9 +1,12 @@
 .admin-events-wrapper{
 display:flex;
-background:#111;
+background:#0f0f0f;
 min-height:100vh;
 color:white;
+font-family:"Poppins",sans-serif;
 }
+
+/* content */
 
 .admin-events-content{
 margin-left:240px;
@@ -11,50 +14,143 @@ padding:120px 50px;
 width:100%;
 }
 
+/* titles */
+
 .admin-events-title{
-font-size:28px;
+font-size:32px;
+font-weight:600;
 margin-bottom:30px;
 }
+
+.admin-events-subtitle{
+font-size:20px;
+margin:30px 0 20px;
+}
+
+/* card */
+
+.admin-events-card{
+background:#1a1a1a;
+padding:30px;
+border-radius:12px;
+max-width:500px;
+box-shadow:0 10px 30px rgba(0,0,0,0.4);
+}
+
+/* form */
 
 .admin-events-form{
-max-width:450px;
-margin-bottom:30px;
+display:flex;
+flex-direction:column;
+gap:12px;
 }
 
-.admin-events-form input{
-width:100%;
+.admin-events-form input,
+.admin-events-form textarea{
 padding:12px;
-margin-bottom:10px;
 border-radius:6px;
 border:none;
-background:#1b1b1b;
+background:#262626;
 color:white;
+font-size:14px;
+outline:none;
 }
 
-.admin-events-form button{
-width:100%;
+.admin-events-form textarea{
+resize:none;
+height:90px;
+}
+
+/* button */
+
+.admin-events-add-btn{
+margin-top:10px;
 padding:12px;
 background:#ff9800;
 border:none;
 border-radius:8px;
 font-weight:600;
 cursor:pointer;
+transition:0.25s;
 }
 
-.admin-events-box{
+.admin-events-add-btn:hover{
+background:#ffa726;
+transform:translateY(-2px);
+}
+
+/* events grid */
+
+.admin-events-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:20px;
+margin-top:20px;
+}
+
+/* event card */
+
+.admin-event-item{
 background:#1b1b1b;
-padding:18px;
+padding:20px;
 border-radius:10px;
 display:flex;
+flex-direction:column;
 justify-content:space-between;
-margin-bottom:15px;
+transition:0.3s;
 }
 
-.admin-events-box button{
-background:#e74c3c;
+.admin-event-item:hover{
+transform:translateY(-4px);
+box-shadow:0 10px 25px rgba(0,0,0,0.5);
+}
+
+/* info */
+
+.admin-event-info h3{
+margin-bottom:8px;
+}
+
+.admin-event-desc{
+font-size:14px;
+opacity:0.8;
+margin-bottom:8px;
+}
+
+.admin-event-date,
+.admin-event-location{
+font-size:13px;
+opacity:0.7;
+}
+
+/* delete button */
+
+.admin-event-delete{
+margin-top:15px;
+padding:8px;
 border:none;
-padding:8px 14px;
-border-radius:6px;
+background:#e74c3c;
 color:white;
+border-radius:6px;
 cursor:pointer;
+transition:0.2s;
+}
+
+.admin-event-delete:hover{
+background:#c0392b;
+}
+
+/* responsive */
+
+@media(max-width:900px){
+
+.admin-events-content{
+margin-left:0;
+padding:100px 20px;
+}
+
+.admin-events-wrapper{
+flex-direction:column;
+}
+
 }
