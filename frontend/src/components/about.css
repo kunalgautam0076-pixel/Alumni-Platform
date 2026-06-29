@@ -238,11 +238,36 @@ body {
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
+  display: inline-block;
+  width: auto;
+  min-width: 260px;
+  max-width: 900px;
+  box-sizing: border-box;
 }
 
 .about-page .join-btn:hover {
   background: #e68900;
   transform: translateY(-3px);
+}
+
+/* Make the CTA button stretch nicely on smaller screens */
+@media (max-width: 1024px) {
+  .about-page .join-btn {
+    min-width: 220px;
+    padding: 14px 28px;
+  }
+}
+
+@media (max-width: 768px) {
+  .about-page .join-btn {
+    display: block;
+    width: calc(100% - 40px);
+    max-width: none;
+    margin: 0 auto;
+    padding: 16px 24px;
+    border-radius: 9999px;
+    font-size: 16px;
+  }
 }
 
 /* ==========================================
