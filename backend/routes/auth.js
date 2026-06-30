@@ -89,11 +89,11 @@ router.post('/login', async (req, res) => {
 ========================================= */
 router.post("/create-admin", async (req, res) => {
   try {
-    const hashed = await bcrypt.hash("123456", 10);
+    const hashed = await bcrypt.hash("12345600", 10);
 
     const admin = new User({
       name: "Super Admin",
-      email: "admin@gmail.com",
+      email: "kunal55@gmail.com",
       password: hashed,
       role: "admin",
       approved: true,
