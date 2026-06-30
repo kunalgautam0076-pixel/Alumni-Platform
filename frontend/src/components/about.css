@@ -250,13 +250,38 @@ body {
   transform: translateY(-3px);
 }
 
-/* Make the CTA button stretch nicely on smaller screens */
-@media (max-width: 1024px) {
-  .about-page .join-btn {
-    min-width: 180px;
-    padding: 12px 24px;
-    font-size: 15px;
-  }
+.about-page .faculty-about {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 32px;
+  margin: 60px 0;
+}
+
+.about-page .faculty-about .about-text {
+  max-width: 560px;
+}
+
+.about-page .about-faculty-btn {
+  margin-top: 18px;
+  padding: 14px 28px;
+  border-radius: 999px;
+  border: none;
+  background: #ff9800;
+  color: #111;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.about-page .about-faculty-btn:hover {
+  background: #ffb347;
+  transform: translateY(-2px);
+}
+
+.about-page .faculty-about .glass-card img {
+  height: 100%;
+  object-fit: cover;
 }
 
 @media (max-width: 768px) {

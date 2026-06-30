@@ -48,6 +48,9 @@ export default function Navbar() {
             <Link to="/about" onClick={() => setMenuOpen(false)}>About Us</Link>
           </li>
           <li>
+            <Link to="/faculty" onClick={() => setMenuOpen(false)}>Faculty</Link>
+          </li>
+          <li>
             <Link to="/alumni" onClick={() => setMenuOpen(false)}>Alumni</Link>
           </li>
           <li>

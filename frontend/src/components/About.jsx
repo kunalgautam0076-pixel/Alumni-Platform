@@ -125,6 +125,29 @@ const About = () => {
         <div className="stat-box"><Counter target={20} /><p>Annual Events</p></div>
       </div>
 
+      {/* FACULTY SECTION */}
+      <div className="about-section faculty-about">
+        <div className="about-text">
+          <h2>Meet Our Faculty</h2>
+          <p>
+            Our faculty are dedicated mentors, researchers, and industry leaders who support alumni growth and lifelong learning.
+          </p>
+          <button
+            className="about-faculty-btn"
+            onClick={() => (window.location.href = "/faculty")}
+          >
+            View Faculty Directory
+          </button>
+        </div>
+
+        <div className="glass-card">
+          <img
+            src="https://images.unsplash.com/photo-1494790108377-be9c29b29330"
+            alt="Faculty team"
+          />
+        </div>
+      </div>
+
       {/* VALUES */}
       <div className="about-values">
         <h2>Our Core Values</h2>

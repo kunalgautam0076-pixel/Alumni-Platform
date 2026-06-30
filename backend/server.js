@@ -35,6 +35,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api/alumni", require("./routes/alumni"));
 app.use("/api/admin", require("./routes/admin"));
+app.use("/api/faculty", require("./routes/faculty"));
 app.use("/api/events", require("./routes/events"));
 app.use("/api/jobs", require("./routes/jobs"));
 app.use("/api/applications", require("./routes/applications"));

@@ -27,6 +27,8 @@ import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminEvents from "./pages/admin/AdminEvents";
 import AdminJobs from "./pages/admin/AdminJobs";
 import AdminRequests from "./pages/admin/AdminRequests";
+import AdminFaculty from "./pages/admin/AdminFaculty";
+import Faculty from "./components/Faculty";
 
 export default function App() {
   return (
@@ -88,6 +90,15 @@ export default function App() {
           />
 
           <Route
+            path="/admin/faculty"
+            element={
+              <AdminRoute>
+                <AdminFaculty />
+              </AdminRoute>
+            }
+          />
+
+          <Route
             path="/admin/requests"
             element={
               <AdminRoute>
@@ -95,6 +106,8 @@ export default function App() {
               </AdminRoute>
             }
           />
+
+          <Route path="/faculty" element={<Faculty />} />
 
         </Routes>
       </main>

@@ -23,6 +23,10 @@ export default function AdminSidebar() {
           Jobs
         </NavLink>
 
+        <NavLink to="/admin/faculty" className="admin-sidebar-link">
+          Faculty
+        </NavLink>
+
         <NavLink to="/admin/requests" className="admin-sidebar-link">
           Requests
         </NavLink>
