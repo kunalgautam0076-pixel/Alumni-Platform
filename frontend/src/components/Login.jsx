@@ -39,7 +39,9 @@ const submit = async (e) => {
     }
 
   } catch (err) {
-    setMsg(err.response?.data?.message || "Invalid credentials");
+    console.error("LOGIN ERROR:", err);
+    const message = err.response?.data?.message || err.message || "Invalid credentials";
+    setMsg(message);
   } finally {
     setLoading(false);
   }
