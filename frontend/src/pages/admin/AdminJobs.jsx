@@ -70,7 +70,7 @@ export default function AdminJobs() {
 
           <input name="salary" placeholder="Salary" onChange={handleChange} />
 
-          <button onClick={addJob}>Add Job</button>
+          <button className="admin-jobs-add-button" onClick={addJob}>Add Job</button>
         </div>
 
         {jobs.map((job) => {
@@ -81,27 +81,27 @@ export default function AdminJobs() {
               <div className="job-main">
                 <div className="job-header-row">
                   <div>
-                    <h4>{job.role} - {job.company}</h4>
-                    <p>{job.location}</p>
+                    <h4>{job.role}</h4>
+                    <p className="job-company">{job.company} · {job.location || 'Remote'}</p>
                   </div>
-                  <button onClick={() => deleteJob(job._id)}>Delete</button>
+                  <button className="admin-jobs-delete-button" onClick={() => deleteJob(job._id)}>Delete</button>
                 </div>
 
                 <div className="applicant-list">
                   {jobApplications.length === 0 ? (
-                    <p className="empty-applicants">No applicants yet</p>
+                    <p className="empty-applicants">No applicants have applied to this job yet.</p>
                   ) : (
                     jobApplications.map((app) => (
                       <div className="applicant-card" key={app._id}>
-                        <div>
+                        <div className="applicant-details">
                           <strong>{app.name}</strong>
                           <p>{app.email}</p>
-                          <p>{app.phone}</p>
+                          <p>{app.phone || 'No phone provided'}</p>
                         </div>
                         <div className="applicant-meta">
-                          <p><strong>Cover Letter:</strong> {app.coverLetter || "—"}</p>
-                          <p><strong>Resume:</strong> {app.resume ? <a href={app.resume} target="_blank" rel="noreferrer">Open Link</a> : "—"}</p>
-                          <p><strong>Applied:</strong> {new Date(app.appliedAt).toLocaleString()}</p>
+                          <p><span>Cover Letter:</span> {app.coverLetter || "N/A"}</p>
+                          <p><span>Resume:</span> {app.resume ? <a className="admin-jobs-applicant-link" href={app.resume} target="_blank" rel="noreferrer">Open Link</a> : "N/A"}</p>
+                          <p><span>Applied:</span> {new Date(app.appliedAt).toLocaleString()}</p>
                         </div>
                       </div>
                     ))
